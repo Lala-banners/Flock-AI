@@ -26,7 +26,7 @@ public class FlockAgent : MonoBehaviour
     }
 
     //Changes the up direction to where ever velocity is facing
-    void Move(Vector2 velocity)
+    public void Move(Vector2 velocity)
     {
         //velocity gives direction and speed
         transform.up = velocity;

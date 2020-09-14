@@ -5,8 +5,8 @@ using UnityEngine;
 public class Flock : MonoBehaviour
 {
     public FlockAgent agentPrefab;
-    List<FlockAgent> agent = new List<FlockAgent>();
-    public FlockBehaviour behaviour;
+    List<FlockAgent> agents = new List<FlockAgent>();
+    public FlockBehavior behavior;
 
     [Range(10,500)] //[Range()] inside unity editor sets min and max birds as a slider
     public int startingCount = 250;
@@ -24,7 +24,7 @@ public class Flock : MonoBehaviour
     [Range(1f, 10f)]
     public float neighborRadius = 1.5f;
 
-    //keep distance between ecah bird so they do not collide with neighbor
+    //keep distance between each bird (agent) so they do not collide with neighbor
     [Range(0f, 1f)]
     public float avoidanceRadiusMultiplier = 0.5f;
 
@@ -55,7 +55,57 @@ public class Flock : MonoBehaviour
                 );
             newAgent.name = "Agent" + i; //change name of agent
             newAgent.Initialize(this); //this is the flock newAgent is a part of
-            agent.Add(newAgent);
+            agents.Add(newAgent);
         }
+    }
+
+    private void Update()
+    {
+        //Be careful with loop within loops (Loopception)
+        foreach(FlockAgent agent in agents)
+        {
+            //List of Transforms called context is the area around the AI
+            //One agent where the AI flocks around it
+            List<Transform> context = GetNearbyObjects(agent);
+
+            //Changing color of Flock Agents
+            agent.GetComponent<SpriteRenderer>().color = Color.Lerp(Color.white, Color.red, context.Count /6f);
+            //Lerp - Linear Interpolate 
+
+            //Referencing move behaviour (not set yet) in Unity and FlockBehaviour script
+            Vector2 move = behavior.CalculateMove(agent, context, this);
+            //move will return some value (to increase speed) and depending on how many generate, 
+            //multiplied by driveFactor
+            move *= driveFactor;
+            //Magnitude is speed inside a Vector - 2 uses, one is storing direction, other is magnitude 
+            if(move.sqrMagnitude > squareMaxSpeed)
+            {
+                //normalized returns Vector with mag of 1, normalize changes Vector 
+                move = move.normalized * maxSpeed;
+            }
+            //F12 shows definition of where the method came from
+            agent.Move(move); 
+        }
+    }
+
+    //By default List<Transform> is private
+    private List<Transform> GetNearbyObjects(FlockAgent agent)
+    {
+        //Empty list that we will write to
+        List<Transform> context = new List<Transform>();
+        //Make an over lap circle around the agents
+        //Each agent will do a circle
+        //Needs a NeighborRadius 
+        Collider2D[] contextColliders = Physics2D.OverlapCircleAll(agent.transform.position, neighborRadius);
+        foreach(Collider2D c in contextColliders)
+        {
+            //If the circle that collides with everything around it is NOT Agent collider
+            //Add to the context
+            if (c != agent.AgentCollider)
+            {
+                context.Add(c.transform);
+            }
+        }
+        return context;
     }
 }
