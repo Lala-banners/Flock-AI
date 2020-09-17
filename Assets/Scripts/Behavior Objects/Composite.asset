@@ -13,9 +13,11 @@ MonoBehaviour:
   m_Name: Composite
   m_EditorClassIdentifier: 
   behaviors:
-  - behaviors: {fileID: 11400000, guid: 1b2c1f052414a5c4d95ee610ab48180c, type: 2}
-    weights: 1
+  - behaviors: {fileID: 11400000, guid: d59c30e2106b7ea4aa29f1a066850909, type: 2}
+    weights: 4
   - behaviors: {fileID: 11400000, guid: 101b6190fa28c6d42ad7a6d14b0e83bf, type: 2}
     weights: 1
   - behaviors: {fileID: 11400000, guid: d26f89dc01a2ed747a7d9014eb837651, type: 2}
-    weights: 1
+    weights: 2
+  - behaviors: {fileID: 11400000, guid: 19b135f2a3c9ce940843191c9226fdb7, type: 2}
+    weights: 0.1
