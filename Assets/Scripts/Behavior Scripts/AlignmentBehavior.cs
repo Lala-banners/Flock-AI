@@ -6,7 +6,7 @@ using UnityEngine;
 // = Created a ScriptableObject object - container of data that doesn't need to be in the scene
 [CreateAssetMenu(menuName = "Flock/Behavior/Alignment")]
 
-public class AlignmentBehavior : FlockBehavior
+public class AlignmentBehavior : FilteredFlockBehavior
 {
     public override Vector2 CalculateMove(FlockAgent agent, List<Transform> context, Flock flock)
     {
@@ -18,7 +18,8 @@ public class AlignmentBehavior : FlockBehavior
 
         //Add all points together and average
         Vector2 alignmentMove = Vector2.zero;
-        foreach(Transform item in context)
+        List<Transform> filteredContext = (filter == null) ? context : filter.Filter(agent, context);
+        foreach (Transform item in filteredContext)
         {
             //Up gives up direction in world space, otherwise in local space then is 0
             alignmentMove += (Vector2)item.transform.up;

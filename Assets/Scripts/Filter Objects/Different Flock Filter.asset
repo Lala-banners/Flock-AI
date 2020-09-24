@@ -9,7 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e2d9c77d74f95b84d863ff5a2e3bb83a, type: 3}
-  m_Name: Cohesion
+  m_Script: {fileID: 11500000, guid: 17fdc0a31ca408549a458cb3bfadea04, type: 3}
+  m_Name: Different Flock Filter
   m_EditorClassIdentifier: 
-  filter: {fileID: 11400000, guid: b895dc466a4839e449b3895c955caea4, type: 2}

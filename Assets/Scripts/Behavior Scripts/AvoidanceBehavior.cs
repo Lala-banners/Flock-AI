@@ -6,7 +6,7 @@ using UnityEngine;
 // = Created a ScriptableObject object - container of data that doesn't need to be in the scene
 [CreateAssetMenu(menuName = "Flock/Behavior/Avoidance")]
 
-public class AvoidanceBehavior : FlockBehavior
+public class AvoidanceBehavior : FilteredFlockBehavior
 {
     public override Vector2 CalculateMove(FlockAgent agent, List<Transform> context, Flock flock)
     {
@@ -19,7 +19,8 @@ public class AvoidanceBehavior : FlockBehavior
         Vector2 avoidanceMove = Vector2.zero;
         //Number of things to avoid variable
         int numAvoid = 0;
-        foreach (Transform item in context)
+        List<Transform> filteredContext = (filter == null) ? context : filter.Filter(agent, context);
+        foreach (Transform item in filteredContext)
         {
             //Agent goes in opposite direction of item inside foreach method
             //Length of direction compared to the direction of SquareAvoidanceRadius

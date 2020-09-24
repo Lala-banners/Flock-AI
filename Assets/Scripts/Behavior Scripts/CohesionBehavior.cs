@@ -6,7 +6,7 @@ using UnityEngine;
 // = Created a ScriptableObject object - container of data that doesn't need to be in the scene
 [CreateAssetMenu(menuName = "Flock/Behavior/Cohesion")]
 
-public class CohesionBehavior : FlockBehavior //Forces whatever is implemented in FlockBehavior to be abstract class (Ctr+ right click)
+public class CohesionBehavior : FilteredFlockBehavior //Forces whatever is implemented in FlockBehavior to be abstract class (Ctr+ right click)
 {
     public override Vector2 CalculateMove(FlockAgent agent, List<Transform> context, Flock flock)
     {
@@ -19,7 +19,8 @@ public class CohesionBehavior : FlockBehavior //Forces whatever is implemented i
         //Add all points together and get the average of neighbors
         //Never assume defaults or variables
         Vector2 cohesionMove = Vector2.zero;
-        foreach (Transform item in context)
+        List<Transform> filteredContext = (filter == null) ? context : filter.Filter(agent, context);
+        foreach (Transform item in filteredContext)
         {
             cohesionMove += (Vector2)item.position;
         }

@@ -68,8 +68,8 @@ public class Flock : MonoBehaviour
             //One agent where the AI flocks around it
             List<Transform> context = GetNearbyObjects(agent);
 
-            //Changing color of Flock Agents
-            agent.GetComponent<SpriteRenderer>().color = Color.Lerp(Color.white, Color.red, context.Count /6f);
+            //Changing color of Flock Agents FOR TESTING
+            //agent.GetComponent<SpriteRenderer>().color = Color.Lerp(Color.white, Color.red, context.Count /6f);
             //Lerp - Linear Interpolate 
 
             //Referencing move behaviour (not set yet) in Unity and FlockBehaviour script
