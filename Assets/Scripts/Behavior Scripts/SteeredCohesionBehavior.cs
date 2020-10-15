@@ -22,12 +22,21 @@ public class SteeredCohesionBehavior : FilteredFlockBehavior
      
         //If filter is null, filteredContext = context or else filteredContext = filter.Filter(agent, context);
         List<Transform> filteredContext = (filter == null) ? context : filter.Filter(agent, context);
+        int count = 0;
         foreach(Transform item in filteredContext)
         {
-            cohesionMove += (Vector2)item.position;
+            if (Vector2.SqrMagnitude(item.position - agent.transform.position) <= flock.SquareSmallRadius)
+            {
+                cohesionMove += (Vector2)item.position;
+                count++;
+            }
         }
-        cohesionMove /= context.Count;
-
+        if (count != 0)
+        {
+           cohesionMove /= count;
+        }
+       
+        //Create offset from agent position
         cohesionMove -= (Vector2)agent.transform.position;
         //gradually changes a vector toward a desired goal over time - 
         //Asks for current position (agent.transform.up), target position(cohesionMove), 

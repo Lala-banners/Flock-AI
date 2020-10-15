@@ -28,17 +28,24 @@ public class Flock : MonoBehaviour
     [Range(0f, 1f)]
     public float avoidanceRadiusMultiplier = 0.5f;
 
+    [Range(0f, 1f)]
+    public float smallRadiusMultiplier = 0.2f;
+
     //will need these for calculations and will need to square other numbers --> bad for computer
     float squareMaxSpeed;
     float squareNeighborRadius;
     float squareAvoidanceRadius;
+    float squareSmallRadius;
     public float SquareAvoidanceRadius { get { return squareAvoidanceRadius; } }
+    public float SquareSmallRadius { get{ return squareSmallRadius; } }
 
     private void Start()
     {
         squareMaxSpeed = maxSpeed * maxSpeed;
         squareNeighborRadius = neighborRadius * neighborRadius;
         squareAvoidanceRadius = squareNeighborRadius * avoidanceRadiusMultiplier * avoidanceRadiusMultiplier;
+        squareSmallRadius = squareNeighborRadius * smallRadiusMultiplier * smallRadiusMultiplier;
+
 
         //Loops for startingCount times of agents
         for (int i = 0; i < startingCount; i++)

@@ -20,15 +20,20 @@ public class CohesionBehavior : FilteredFlockBehavior //Forces whatever is imple
         //Never assume defaults or variables
         Vector2 cohesionMove = Vector2.zero;
         List<Transform> filteredContext = (filter == null) ? context : filter.Filter(agent, context);
+        int count = 0;
         foreach (Transform item in filteredContext)
         {
-            cohesionMove += (Vector2)item.position;
+            if (Vector2.SqrMagnitude(item.position - agent.transform.position) <= flock.SquareSmallRadius)
+            {
+                cohesionMove += (Vector2)item.position;
+            }
         }
-        //Average location of everything in the context around each agent 
-        // (/=) equivilent to dividing 
-        cohesionMove /= context.Count;
-
-        //Create offset from agent position
+        if (count != 0)
+        {
+            //Average location of everything in the context around each agent 
+            // (/=) equivilent to dividing 
+            cohesionMove /= count;
+        }
 
         //Direction from a to b = b - a
         //cohesionMove = cohesionMove - (Vector2)agent.transform.position;
