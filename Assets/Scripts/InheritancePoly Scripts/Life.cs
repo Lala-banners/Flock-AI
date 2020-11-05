@@ -15,8 +15,6 @@ public class Life : MonoBehaviour
     //[Header("Prey")]
 
     #region Variables
-    public GameObject[] PredatorWaypoints;
-    public GameObject[] PreyWaypoints;
     public GameObject[] Obstacles;
     
     #endregion

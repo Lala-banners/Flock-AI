@@ -14,9 +14,9 @@ public class Prey : Life
     #endregion
 
     #region Variables
+    public GameObject[] PreyWaypoints;
     public PreyState state;
     public bool ChangeState = false;
-    //public float ?
     #endregion
 
     #region States

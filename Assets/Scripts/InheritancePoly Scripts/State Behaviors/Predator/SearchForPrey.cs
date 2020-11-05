@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NewBehaviourScript3 : MonoBehaviour
+public class SearchForPrey : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()

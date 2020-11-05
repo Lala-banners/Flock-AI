@@ -17,6 +17,7 @@ public class Predator : Life
 
     #region Variables
     [Header("Predator Stats")]
+    public GameObject[] PredatorWaypoints;
     public PredatorState state;
     public bool ChangeState = false;
     [Space]

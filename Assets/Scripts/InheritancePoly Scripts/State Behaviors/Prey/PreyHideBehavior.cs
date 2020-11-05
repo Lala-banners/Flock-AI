@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NewBehaviourScript4 : MonoBehaviour
+public class PreyHideBehavior : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()

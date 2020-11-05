@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class _WanderBehavior : MonoBehaviour
+public class AttackBehavior : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
