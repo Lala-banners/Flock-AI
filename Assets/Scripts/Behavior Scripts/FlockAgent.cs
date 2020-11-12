@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 //we have to be attached to a game object that has a Collider2D
 [RequireComponent(typeof(Collider2D))] 
