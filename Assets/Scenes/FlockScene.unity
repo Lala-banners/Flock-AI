@@ -473,7 +473,7 @@ GameObject:
   - component: {fileID: 324942938}
   - component: {fileID: 324942937}
   m_Layer: 0
-  m_Name: Flock Blue
+  m_Name: Blue Prey
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -736,7 +736,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -22.7}
+  m_LocalPosition: {x: 0, y: 0, z: -24}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -999,7 +999,7 @@ GameObject:
   - component: {fileID: 1156301578}
   - component: {fileID: 1156301579}
   m_Layer: 0
-  m_Name: Flock Red
+  m_Name: Red Predator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

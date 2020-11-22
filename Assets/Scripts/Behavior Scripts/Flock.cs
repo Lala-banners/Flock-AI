@@ -31,7 +31,7 @@ public class Flock : MonoBehaviour
     [Range(0f, 1f)]
     public float smallRadiusMultiplier = 0.2f;
 
-    //will need these for calculations and will need to square other numbers --> bad for computer
+    //will need these for calculations and will need to square other numbers 
     float squareMaxSpeed;
     float squareNeighborRadius;
     float squareAvoidanceRadius;
@@ -79,7 +79,7 @@ public class Flock : MonoBehaviour
             //agent.GetComponent<SpriteRenderer>().color = Color.Lerp(Color.white, Color.red, context.Count /6f);
             //Lerp - Linear Interpolate 
 
-            //Referencing move behaviour (not set yet) in Unity and FlockBehaviour script
+            //Referencing move behaviour in Unity and FlockBehaviour script
             Vector2 move = behavior.CalculateMove(agent, context, this);
             //move will return some value (to increase speed) and depending on how many generate, 
             //multiplied by driveFactor
