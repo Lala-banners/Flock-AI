@@ -27,6 +27,20 @@ public class Predator : Life
     #region Attack
     private IEnumerator AttackState()
     {
+
+
+        yield return 0;
+    }
+    
+    private void Attack()
+    {
+
+    }
+    #endregion
+
+    #region Wander
+    private IEnumerator WanderState()
+    {
         while (lifeStates == LifeStates.Wander) //while in wander state
         {
             foreach (FlockAgent agent in flock.agents) //go through list of agents in FlockAgent
@@ -38,21 +52,6 @@ public class Predator : Life
 
         yield return 0;
     }
-
-    private void Attack()
-    {
-
-    }
-    #endregion
-
-    #region Wander
-    private IEnumerator WanderState()
-    {
-
-
-        yield return 0;
-    }
-
     private void Wander()
     {
 

@@ -24,12 +24,6 @@ public class Prey : Life
         NextState();
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
     // Update is called once per frame
     void Update()
     {
@@ -49,4 +43,20 @@ public class Prey : Life
         //Using StartCoroutine() means we can leave and come back to the method that is running
         //All Coroutines must return IEnumerator
     }
+
+    // OnCollisionEnter is called when this collider/rigidbody has begun touching another rigidbody/collider
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(gameObject.tag == "Predator" && collision.gameObject.tag == "Prey")
+        {
+            Destroy(collision.gameObject);
+            print("Prey being eaten");
+        }
+    }
+
+
+
+
+
+
 }

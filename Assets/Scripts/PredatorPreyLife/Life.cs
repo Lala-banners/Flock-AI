@@ -57,4 +57,16 @@ public class Life : MonoBehaviour
         //Using StartCoroutine() means we can leave and come back to the method that is running
         //All Coroutines must return IEnumerator
     }
+
+    // OnCollisionEnter is called when this collider/rigidbody has begun touching another rigidbody/collider
+    private void OnCollisionEnter(Collision collision) //For destroying prey on impact with predator
+    {
+        if(gameObject.tag == "Predator" && collision.gameObject.CompareTag("Prey"))
+        {
+            Destroy(collision.gameObject);
+            print("Prey eaten");
+        }
+    }
+
+
 }
