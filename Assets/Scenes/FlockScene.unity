@@ -471,7 +471,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 324942938}
-  - component: {fileID: 324942937}
+  - component: {fileID: 324942939}
   m_Layer: 0
   m_Name: Blue Prey
   m_TagString: Untagged
@@ -479,27 +479,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &324942937
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 324942936}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c7868c6a20ce89e42898c9be4394a0d2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  agentPrefab: {fileID: 5112794619473145483, guid: 51328db0d762bb947ab264e1e52965e5,
-    type: 3}
-  behavior: {fileID: 11400000, guid: 2efcd68aca0eecb4cb593e922743e159, type: 2}
-  startingCount: 20
-  driveFactor: 10
-  maxSpeed: 5
-  neighborRadius: 7
-  avoidanceRadiusMultiplier: 0.1
-  smallRadiusMultiplier: 0.3
 --- !u!4 &324942938
 Transform:
   m_ObjectHideFlags: 0
@@ -514,6 +493,27 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &324942939
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 324942936}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 463fa84a602352f479b999fa3711c668, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  agentPrefab: {fileID: 5112794619473145483, guid: 51328db0d762bb947ab264e1e52965e5,
+    type: 3}
+  behavior: {fileID: 11400000, guid: 2efcd68aca0eecb4cb593e922743e159, type: 2}
+  driveFactor: 10
+  maxSpeed: 5
+  neighborRadius: 1.5
+  avoidanceRadiusMultiplier: 0.5
+  smallRadiusMultiplier: 0.2
+  startingCount: 250
 --- !u!1 &425687628
 GameObject:
   m_ObjectHideFlags: 0
@@ -997,7 +997,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1156301578}
-  - component: {fileID: 1156301579}
+  - component: {fileID: 1156301580}
   m_Layer: 0
   m_Name: Red Predator
   m_TagString: Untagged
@@ -1019,7 +1019,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1156301579
+--- !u!114 &1156301580
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1028,18 +1028,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 1156301577}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c7868c6a20ce89e42898c9be4394a0d2, type: 3}
+  m_Script: {fileID: 11500000, guid: 579a51597c7de984e8c3cc486463e62b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   agentPrefab: {fileID: 5112794619473145483, guid: 33e225d3234a2614ba3e2dc6d11be897,
     type: 3}
   behavior: {fileID: 11400000, guid: 3f319668cc12b2343a2c3628e501f240, type: 2}
-  startingCount: 10
   driveFactor: 10
   maxSpeed: 5
-  neighborRadius: 7
-  avoidanceRadiusMultiplier: 0.1
-  smallRadiusMultiplier: 0.3
+  neighborRadius: 1.5
+  avoidanceRadiusMultiplier: 0.5
+  smallRadiusMultiplier: 0.2
 --- !u!1 &1326678502
 GameObject:
   m_ObjectHideFlags: 0

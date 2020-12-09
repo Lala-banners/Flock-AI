@@ -14,7 +14,7 @@ public class HideBehavior : FilteredFlockBehavior
     #endregion
 
     #region Functions
-    public override Vector2 CalculateMove(FlockAgent agent, List<Transform> context, Flock flock)
+    public override Vector2 CalculateMove(FlockAgent agent, List<Transform> context, FlockLife flock)
     {
         if (context.Count == 0)
         {

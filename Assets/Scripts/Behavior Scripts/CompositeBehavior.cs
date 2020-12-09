@@ -17,7 +17,7 @@ public class CompositeBehavior : FlockBehavior
 
     public BehaviorGroup[] behaviors;
 
-    public override Vector2 CalculateMove(FlockAgent agent, List<Transform> context, Flock flock)
+    public override Vector2 CalculateMove(FlockAgent agent, List<Transform> context, FlockLife flock)
     {
         //Outside the class in variable form = CompositeBehavior.BehaviorGroup varName;
         Vector2 move = Vector2.zero;

@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class PursuitBehavior : FilteredFlockBehavior
 {
-    public override Vector2 CalculateMove(FlockAgent agent, List<Transform> context, Flock flock)
+    public override Vector2 CalculateMove(FlockAgent agent, List<Transform> context, FlockLife flock)
     {
         List<Transform> filteredContext = (filter == null) ? context : filter.Filter(agent, context);
 

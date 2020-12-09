@@ -10,7 +10,7 @@ public class StayAtHomeBehavior : FlockBehavior
     [SerializeField]
     public float radius = 15;
 
-    public override Vector2 CalculateMove(FlockAgent agent, List<Transform> context, Flock flock)
+    public override Vector2 CalculateMove(FlockAgent agent, List<Transform> context, FlockLife flock)
     {
         //Direction to the center
         //Magnitude will be the distance to the center

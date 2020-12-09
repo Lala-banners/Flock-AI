@@ -7,7 +7,7 @@ using UnityEngine;
 
 public class AvoidanceBehavior : FilteredFlockBehavior
 {
-    public override Vector2 CalculateMove(FlockAgent agent, List<Transform> context, Flock flock)
+    public override Vector2 CalculateMove(FlockAgent agent, List<Transform> context, FlockLife flock)
     {
         //Trying to move away from neighbors
         if (context.Count == 0)

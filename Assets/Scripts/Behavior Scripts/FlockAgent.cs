@@ -6,9 +6,9 @@ public class FlockAgent : MonoBehaviour
 {
     //FlockAgent is CharacterController of AI
 
-    Flock agentFlock;
+    FlockLife agentFlock;
     //another class can access value of AgentCollider but cannot change it (would need a set)
-    public Flock AgentFlock { get { return agentFlock; } }
+    public FlockLife AgentFlock { get { return agentFlock; } }
 
     private Collider2D agentCollider;
     //another class can access value of AgentCollider but cannot change it (would need a set)
@@ -18,7 +18,7 @@ public class FlockAgent : MonoBehaviour
         agentCollider = GetComponent<Collider2D>();
     }
 
-    public void Initialize(Flock flock)
+    public void Initialize(FlockLife flock)
     {
         agentFlock = flock;
     }
