@@ -8,7 +8,7 @@ using UnityEngine;
 
 public class AlignmentBehavior : FilteredFlockBehavior
 {
-    public override Vector2 CalculateMove(FlockAgent agent, List<Transform> context, FlockLife flock)
+    public override Vector2 CalculateMove(FlockAgent agent, List<Transform> context, Flock flock)
     {
         if(context.Count == 0)
         {

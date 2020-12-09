@@ -2,21 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FlockLife : MonoBehaviour
+public class Flock : MonoBehaviour
 {
     public FlockAgent agentPrefab;
     List<FlockAgent> agents = new List<FlockAgent>();
     public FlockBehavior behavior;
 
-    [Range(1f, 100f)]
-    public float maxSpeed = 5f;
-
+    [Range(10,500)] //[Range()] inside unity editor sets min and max birds as a slider
+    public int startingCount = 250;
     //const = constant number that does not change unless in script
     const float AgentDensity = 0.08f;
 
     //driveFactor gives us back direction number and if its too small, makes flock go faster by multiplying that number
     [Range(1f, 100f)]
     public float driveFactor = 10f;
+
+    [Range(1f,100f)]
+    public float maxSpeed = 5f;
 
     //each agent is based off their neighbor so they stay together
     [Range(1f, 10f)]
@@ -30,8 +32,8 @@ public class FlockLife : MonoBehaviour
     public float smallRadiusMultiplier = 0.2f;
 
     //will need these for calculations and will need to square other numbers 
-    private float squareMaxSpeed;
-    private float squareNeighborRadius;
+    float squareMaxSpeed;
+    float squareNeighborRadius;
     float squareAvoidanceRadius;
     float squareSmallRadius;
     public float SquareAvoidanceRadius { get { return squareAvoidanceRadius; } }
@@ -46,7 +48,7 @@ public class FlockLife : MonoBehaviour
 
 
         //Loops for startingCount times of agents
-        for (int i = 0; i < Prey.instance.startingCount; i++)
+        for (int i = 0; i < startingCount; i++)
         {
             //Instantiate = makes a duplicate of an object or a prefab 
             //Random.insideUnitCircle returns random point inside a circle, number from startingCount * AgentDensity
@@ -54,7 +56,7 @@ public class FlockLife : MonoBehaviour
             //Quaternion.Euler(Vector3.forward * Random.Range(0,360f)) 
             FlockAgent newAgent = Instantiate(
                 agentPrefab,
-                Random.insideUnitCircle * Prey.instance.startingCount * AgentDensity, 
+                Random.insideUnitCircle * startingCount * AgentDensity, 
                 Quaternion.Euler(Vector3.forward * Random.Range(0,360f)),
                 transform //child of transform game object 
                 );
@@ -86,7 +88,7 @@ public class FlockLife : MonoBehaviour
             if(move.sqrMagnitude > squareMaxSpeed)
             {
                 //normalized returns Vector with mag of 1, normalize changes Vector 
-                move = move.normalized * Prey.instance.maxPreySpeed;
+                move = move.normalized * maxSpeed;
             }
             //F12 shows definition of where the method came from
             agent.Move(move); 

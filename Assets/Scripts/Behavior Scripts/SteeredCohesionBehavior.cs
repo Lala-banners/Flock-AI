@@ -9,7 +9,7 @@ public class SteeredCohesionBehavior : FilteredFlockBehavior
     Vector2 currentVelocity;
     public float agentSmoothTime = 0.5f;
 
-    public override Vector2 CalculateMove(FlockAgent agent, List<Transform> context, FlockLife flock)
+    public override Vector2 CalculateMove(FlockAgent agent, List<Transform> context, Flock flock)
     {
         //If no neighbors, return no adjustment
         if (context.Count == 0)

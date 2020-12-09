@@ -7,7 +7,7 @@ using UnityEngine;
 
 public class CohesionBehavior : FilteredFlockBehavior //Forces whatever is implemented in FlockBehavior to be abstract class (Ctr+ right click)
 {
-    public override Vector2 CalculateMove(FlockAgent agent, List<Transform> context, FlockLife flock)
+    public override Vector2 CalculateMove(FlockAgent agent, List<Transform> context, Flock flock)
     {
         //Going in the same direction as the agents
         if(context.Count == 0)

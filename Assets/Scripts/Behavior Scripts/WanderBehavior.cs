@@ -12,7 +12,7 @@ public class WanderBehavior : FilteredFlockBehavior //Check if following a path
     #endregion
 
     #region FUNCTIONS
-    public override Vector2 CalculateMove(FlockAgent agent, List<Transform> context, FlockLife flock)
+    public override Vector2 CalculateMove(FlockAgent agent, List<Transform> context, Flock flock)
     {
         //Find a path and follow the path
         if (path == null)
