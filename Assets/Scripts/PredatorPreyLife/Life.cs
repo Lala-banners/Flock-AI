@@ -8,6 +8,7 @@ public enum LifeStates //contains both predator and prey states
     Wander,
     Evade,
     Hide,
+    Flock,
     #endregion
 
     #region Predator
@@ -44,7 +45,7 @@ public class Life : MonoBehaviour
     }
 
     //Function for calling the next state
-    private void NextState()
+    protected void NextState()
     {
         string methodName = lifeStates.ToString() + "State";
 

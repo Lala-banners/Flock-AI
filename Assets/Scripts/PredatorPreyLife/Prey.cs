@@ -2,47 +2,97 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum PreyStates
-{
-    Wander,
-    Evade,
-    Hide
-}
-
 public class Prey : Life
 {
-    public PreyStates states;
     private FlockBehavior wanderBehavior;
+    private FlockBehavior flockBehavior;
+    private FlockBehavior hideBehavior;
+    private FlockBehavior evadeBehavior;
+    [SerializeField] private ContextFilter otherFlock;
 
+    #region Wander
     IEnumerator WanderState()
     {
         flock.behavior = wanderBehavior;
-        while (states == PreyStates.Wander)
+        while (lifeStates == LifeStates.Wander)
         {
+            print("Prey are wandering");
             yield return 0;
         }
         NextState();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Wander() 
     {
-        
+
+    }
+    #endregion
+
+    #region Evade
+    IEnumerator EvadeState()
+    {
+        flock.behavior = evadeBehavior;
+        while (lifeStates == LifeStates.Evade)
+        {
+            print("Prey are evading predator");
+            foreach (FlockAgent agent in flock.agents)
+            {
+                List<Transform> filteredContext = (otherFlock == null) ? flock.context : otherFlock.Filter(agent, flock.context);
+                if (filteredContext.Count <= 0)
+                {
+                    lifeStates = LifeStates.Wander;
+                }
+                else
+                {
+
+                }
+            }
+            yield return 0;
+        }
+        NextState();
     }
 
-    private void NextState()
+    private void Evade()
     {
-        string methodName = states.ToString() + "State";
 
-        System.Reflection.MethodInfo info =
-            GetType().GetMethod(methodName,
-                                System.Reflection.BindingFlags.NonPublic |
-                                System.Reflection.BindingFlags.Instance);
-        //Run our method
-        StartCoroutine((IEnumerator)info.Invoke(this, null));
-        //Using StartCoroutine() means we can leave and come back to the method that is running
-        //All Coroutines must return IEnumerator
     }
+    #endregion
+
+    #region Hide
+    IEnumerator HideState()
+    {
+        flock.behavior = hideBehavior;
+        while (lifeStates == LifeStates.Hide)
+        {
+            print("Prey are hiding");
+            yield return 0;
+        }
+        NextState();
+    }
+
+    private void Hide()
+    {
+
+    }
+    #endregion
+
+    #region Flock
+    IEnumerator FlockState()
+    {
+        flock.behavior = flockBehavior;
+        while (lifeStates == LifeStates.Flock)
+        {
+            print("Prey are flocking");
+            yield return 0;
+        }
+        NextState();
+    }
+
+    private void Flock()
+    {
+
+    }
+    #endregion
 
     // OnCollisionEnter is called when this collider/rigidbody has begun touching another rigidbody/collider
     private void OnCollisionEnter(Collision collision)
@@ -50,7 +100,7 @@ public class Prey : Life
         if(gameObject.tag == "Predator" && collision.gameObject.tag == "Prey")
         {
             Destroy(collision.gameObject);
-            print("Prey being eaten");
+            print("Prey are being eaten");
         }
     }
 

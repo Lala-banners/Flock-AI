@@ -778,7 +778,7 @@ MonoBehaviour:
   - {fileID: 1689166882}
   - {fileID: 469524559}
   - {fileID: 1137707916}
-  radius: 0
+  radius: 5
   gizmoSize: {x: 0.2, y: 0.2, z: 0.2}
 --- !u!4 &757325725
 Transform:
@@ -823,7 +823,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 830151720}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.29, y: 3.25, z: 0}
+  m_LocalPosition: {x: 1.87, y: 4.36, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 757325725}
@@ -1077,7 +1077,7 @@ MonoBehaviour:
   lifeStates: 0
   changeState: 0
   flock: {fileID: 324942937}
-  states: 0
+  otherFlock: {fileID: 11400000, guid: 26ee34276c4bded4fbd5bd2bfce7ebe8, type: 2}
 --- !u!4 &1311678251
 Transform:
   m_ObjectHideFlags: 0
@@ -1099,7 +1099,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1311678249}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c7868c6a20ce89e42898c9be4394a0d2, type: 3}
   m_Name: 
@@ -1278,9 +1278,14 @@ MonoBehaviour:
   changeState: 0
   flock: {fileID: 1156301579}
   agent: {fileID: 5112794619473145483, guid: 33e225d3234a2614ba3e2dc6d11be897, type: 3}
+  predatorSpeed: {x: 0, y: 0}
   damage: 0
-  attack: {fileID: 11400000, guid: 896bade168389db43bed3eabaf4ae43c, type: 2}
+  attackBehavior: {fileID: 11400000, guid: 896bade168389db43bed3eabaf4ae43c, type: 2}
   otherFlock: {fileID: 11400000, guid: 26ee34276c4bded4fbd5bd2bfce7ebe8, type: 2}
+  prey: {fileID: 1311678250}
+  wanderPoints: []
+  index: 0
+  minDistance: 0.5
 --- !u!4 &1438710555
 Transform:
   m_ObjectHideFlags: 0
@@ -1302,7 +1307,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1438710553}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c7868c6a20ce89e42898c9be4394a0d2, type: 3}
   m_Name: 
