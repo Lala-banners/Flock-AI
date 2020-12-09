@@ -19,7 +19,7 @@ public class Predator : Life
     // Update is called once per frame
     void Update()
     {
-        
+        MovePredator(prey.transform.position);
     }
 
     private void MovePredator(Vector2 targetPosition)
