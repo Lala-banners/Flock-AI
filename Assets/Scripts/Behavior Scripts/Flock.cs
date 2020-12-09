@@ -5,7 +5,7 @@ using UnityEngine;
 public class Flock : MonoBehaviour
 {
     public FlockAgent agentPrefab;
-    List<FlockAgent> agents = new List<FlockAgent>();
+    public List<FlockAgent> agents = new List<FlockAgent>();
     public FlockBehavior behavior;
 
     [Range(10,500)] //[Range()] inside unity editor sets min and max birds as a slider
@@ -66,14 +66,17 @@ public class Flock : MonoBehaviour
         }
     }
 
+    public List<Transform> context = new List<Transform>();
+
     private void Update()
     {
+
         //Be careful with loop within loops (Loopception)
-        foreach(FlockAgent agent in agents)
+        foreach (FlockAgent agent in agents)
         {
             //List of Transforms called context is the area around the AI
             //One agent where the AI flocks around it
-            List<Transform> context = GetNearbyObjects(agent);
+            context = GetNearbyObjects(agent);
 
             //Changing color of Flock Agents FOR TESTING
             //agent.GetComponent<SpriteRenderer>().color = Color.Lerp(Color.white, Color.red, context.Count /6f);
@@ -85,13 +88,13 @@ public class Flock : MonoBehaviour
             //multiplied by driveFactor
             move *= driveFactor;
             //Magnitude is speed inside a Vector - 2 uses, one is storing direction, other is magnitude 
-            if(move.sqrMagnitude > squareMaxSpeed)
+            if (move.sqrMagnitude > squareMaxSpeed)
             {
                 //normalized returns Vector with mag of 1, normalize changes Vector 
                 move = move.normalized * maxSpeed;
             }
             //F12 shows definition of where the method came from
-            agent.Move(move); 
+            agent.Move(move);
         }
     }
 
@@ -116,3 +119,4 @@ public class Flock : MonoBehaviour
         return context;
     }
 }
+
