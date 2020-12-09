@@ -639,7 +639,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 469524558}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.49, y: 0.51, z: 0}
+  m_LocalPosition: {x: 11.12, y: -5.53, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 757325725}
@@ -823,7 +823,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 830151720}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.87, y: 4.36, z: 0}
+  m_LocalPosition: {x: -6.06, y: 10.34, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 757325725}
@@ -1278,10 +1278,11 @@ MonoBehaviour:
   changeState: 0
   flock: {fileID: 1156301579}
   agent: {fileID: 5112794619473145483, guid: 33e225d3234a2614ba3e2dc6d11be897, type: 3}
-  predatorSpeed: {x: 0, y: 0}
-  damage: 0
+  damage: 100
+  seekBehavior: {fileID: 11400000, guid: 896bade168389db43bed3eabaf4ae43c, type: 2}
   attackBehavior: {fileID: 11400000, guid: 896bade168389db43bed3eabaf4ae43c, type: 2}
   otherFlock: {fileID: 11400000, guid: 26ee34276c4bded4fbd5bd2bfce7ebe8, type: 2}
+  obstacleAvoidance: {fileID: 11400000, guid: 644e9f27383085f40b8fc37a46219edf, type: 2}
   prey: {fileID: 1311678250}
   wanderPoints:
   - {fileID: 830151720}
@@ -1429,7 +1430,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1689166881}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.6, y: 0.18, z: 0}
+  m_LocalPosition: {x: 7.27, y: 10.83, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 757325725}
