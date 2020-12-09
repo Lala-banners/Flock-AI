@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Prey : Life
 {
+    protected float preySpeed;
     private FlockBehavior wanderBehavior;
     private FlockBehavior flockBehavior;
     private FlockBehavior hideBehavior;
@@ -94,15 +95,6 @@ public class Prey : Life
     }
     #endregion
 
-    // OnCollisionEnter is called when this collider/rigidbody has begun touching another rigidbody/collider
-    private void OnCollisionEnter(Collision collision)
-    {
-        if(gameObject.tag == "Predator" && collision.gameObject.tag == "Prey")
-        {
-            Destroy(collision.gameObject);
-            print("Prey are being eaten");
-        }
-    }
 
 
 

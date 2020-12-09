@@ -6,10 +6,12 @@ public class Predator : Life
 {
     [Header("Predator")]
     public FlockAgent agent;
-    public Vector2 predatorSpeed;
+    protected float predatorSpeed;
     public float damage;
-    [SerializeField] private FlockBehavior attackBehavior;
-    [SerializeField] private ContextFilter otherFlock;
+    [SerializeField] private FlockBehavior seekBehavior; //if prey is in range, change to attack
+    [SerializeField] private FlockBehavior attackBehavior; //while prey are in attacking range or if all prey is gone, change to wander
+    [SerializeField] private ContextFilter otherFlock; //for distinguishing between predator and prey
+    [SerializeField] private ContextFilter obstacleAvoidance; //for collision avoidance
     public Prey prey;
     public GameObject[] wanderPoints;
     public int index = 0;
@@ -17,14 +19,15 @@ public class Predator : Life
     // Update is called once per frame
     void Update()
     {
-        MovePredator(predatorSpeed);
+        
     }
 
-    private void MovePredator(Vector2 velocity)
+    private void MovePredator(Vector2 targetPosition)
     {
         print("Predators are moving");
-        transform.up = predatorSpeed;
-        transform.position += (Vector3)velocity * Time.deltaTime;
+        transform.position = Vector2.MoveTowards(transform.position, targetPosition, predatorSpeed * Time.deltaTime);
+        /*transform.up = predatorSpeed;
+        transform.position += (Vector3)predatorSpeed * Time.deltaTime;*/
     }
 
 
@@ -33,6 +36,7 @@ public class Predator : Life
     {
         while (lifeStates == LifeStates.Attack)
         {
+
             print("Predator are eating prey");
             yield return 0;
         }
@@ -45,6 +49,7 @@ public class Predator : Life
     }
     #endregion
 
+  
     #region Wander
     private IEnumerator WanderState() //make predator travel path
     {
@@ -55,9 +60,23 @@ public class Predator : Life
             {
                 //Filter through the list of agents and find prey (other flock)
                 List<Transform> filteredContext = (otherFlock == null) ? flock.context : otherFlock.Filter(agent, flock.context);
+                MovePredator(prey.transform.position);
+                yield return null;
+                //If the distance between the prey and predator is greater than 5(chase prey range) then AI patrols
+                if (Vector2.Distance(prey.transform.position, transform.position) > chaseRadius)
+                {
+                    //Change state to wander state
+                    lifeStates = LifeStates.Wander;
+                }
+                //If the distance between the prey and predator is less than 5(attack prey range)  
+                else if (Vector2.Distance(prey.transform.position, transform.position) < chaseRadius)
+                {
+                    //Change state to attack state and eat prey
+                    lifeStates = LifeStates.Attack;
+                }
             }
         }
-
+        NextState();
         yield return 0;
     }
     public float minDistance = 0.5f;

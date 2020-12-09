@@ -24,10 +24,10 @@ public class Life : MonoBehaviour
     [Header("Life Stats")] //Stats that both Predator and Prey have
     public LifeStates lifeStates;
     public bool changeState = false;
-    protected float speed;
+    protected float speed = 10; //prey speed
     protected float attackStrength; //for predator to attack prey
-    protected float chaseRadius; //for predator to chase prey
-    protected float fleeRadius; //for prey to flee predator
+    protected float chaseRadius = 5f; //for predator to chase prey
+    protected float fleeRadius = 10f; //for prey to flee predator
 
     //Connection to Flock script
     [SerializeField] protected Flock flock;
@@ -58,16 +58,4 @@ public class Life : MonoBehaviour
         //Using StartCoroutine() means we can leave and come back to the method that is running
         //All Coroutines must return IEnumerator
     }
-
-    // OnCollisionEnter is called when this collider/rigidbody has begun touching another rigidbody/collider
-    private void OnCollisionEnter(Collision collision) //For destroying prey on impact with predator
-    {
-        if(gameObject.tag == "Predator" && collision.gameObject.CompareTag("Prey"))
-        {
-            Destroy(collision.gameObject);
-            print("Prey eaten");
-        }
-    }
-
-
 }
