@@ -19,17 +19,9 @@ public class Predator : Life
     // Update is called once per frame
     void Update()
     {
-        MovePredator(prey.transform.position);
+        
     }
 
-    private void MovePredator(Vector2 targetPosition)
-    {
-        print("Predators are moving");
-        transform.position = Vector2.MoveTowards(transform.position, targetPosition, predatorSpeed * Time.deltaTime);
-        /*transform.up = predatorSpeed;
-        transform.position += (Vector3)predatorSpeed * Time.deltaTime;*/
-    }
-/*
 
     #region Attack
     private IEnumerator AttackState()
@@ -38,18 +30,18 @@ public class Predator : Life
         {
 
             print("Predator are eating prey");
-            
+
         }
         yield return null;
     }
-    
+
     private void Attack()
     {
 
     }
     #endregion
 
-  
+
     #region Wander
     private IEnumerator WanderState() //make predator travel path
     {
@@ -60,7 +52,7 @@ public class Predator : Life
             {
                 //Filter through the list of agents and find prey (other flock)
                 List<Transform> filteredContext = (otherFlock == null) ? flock.context : otherFlock.Filter(agent, flock.context);
-                MovePredator(prey.transform.position);
+                flock.agentPrefab.Move(wanderPoints[index].position); //move on waypoints
                 yield return null;
                 //If the distance between the prey and predator is greater than 5(chase prey range) then AI patrols
                 if (Vector2.Distance(prey.transform.position, transform.position) > chaseRadius)
@@ -76,8 +68,8 @@ public class Predator : Life
                 }
             }
         }
-        yield return null;
         NextState();
+        yield return null;
     }
     public float minDistance = 0.5f;
     private void Wander() //Predator traveling waypoints
@@ -86,15 +78,15 @@ public class Predator : Life
         float distance = Vector2.Distance(transform.position, wanderPoints[index].transform.position);
 
         //if distance between predator and waypoints is less than 0.5 then increase index of waypoints
-        if(distance < minDistance)
+        if (distance < minDistance)
         {
             index++;
         }
-        if(index >= wanderPoints.Length)
+        if (index >= wanderPoints.Length)
         {
-            index = 0; 
+            index = 0;
         }
-        MovePredator(wanderPoints[index].transform.position);
+        flock.agentPrefab.Move(wanderPoints[index].position);
     }
     #endregion
 
@@ -104,7 +96,7 @@ public class Predator : Life
         while (lifeStates == LifeStates.Pursuit)
         {
             print("Predator are pursuing prey");
-            
+
         }
         yield return null;
     }
@@ -121,7 +113,7 @@ public class Predator : Life
         while (lifeStates == LifeStates.CollisionAvoidance)
         {
             print("Predator are avoiding obstacles");
-            
+
         }
         yield return null;
     }
@@ -132,6 +124,6 @@ public class Predator : Life
     }
     #endregion
 
-*/
+
 
 }

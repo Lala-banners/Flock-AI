@@ -11,6 +11,8 @@ public class Prey : Life
     [SerializeField] private FlockBehavior evadeBehavior; //other flock avoidance - make weight very high
     [SerializeField] private ContextFilter otherFlock; //for distinguishing between predator and prey
     public Transform[] preyWanderPoint;
+    public int i; //waypoint index
+    public float minDistance = 0.5f;
 
     #region Wander
     IEnumerator WanderState()
@@ -19,6 +21,19 @@ public class Prey : Life
         while (lifeStates == LifeStates.Wander)
         {
             print("Prey are wandering");
+            //Getting distance between the predator and the waypoints
+            float distance = Vector2.Distance(transform.position, preyWanderPoint[i].transform.position);
+
+            //if distance between predator and waypoints is less than 0.5 then increase index of waypoints
+            if (distance < minDistance)
+            {
+                i++;
+            }
+            if (i >= preyWanderPoint.Length)
+            {
+                i = 0;
+            }
+            flock.agentPrefab.Move(preyWanderPoint[i].position);
         }
         yield return null;
         NextState();
