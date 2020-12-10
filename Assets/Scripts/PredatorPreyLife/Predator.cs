@@ -13,7 +13,7 @@ public class Predator : Life
     [SerializeField] private ContextFilter otherFlock; //for distinguishing between predator and prey
     [SerializeField] private ContextFilter obstacleAvoidance; //for collision avoidance
     public Prey prey;
-    public GameObject[] wanderPoints;
+    public Transform[] wanderPoints;
     public int index = 0;
 
     // Update is called once per frame
@@ -29,7 +29,7 @@ public class Predator : Life
         /*transform.up = predatorSpeed;
         transform.position += (Vector3)predatorSpeed * Time.deltaTime;*/
     }
-
+/*
 
     #region Attack
     private IEnumerator AttackState()
@@ -38,9 +38,9 @@ public class Predator : Life
         {
 
             print("Predator are eating prey");
-            yield return 0;
+            
         }
-
+        yield return null;
     }
     
     private void Attack()
@@ -76,8 +76,8 @@ public class Predator : Life
                 }
             }
         }
+        yield return null;
         NextState();
-        yield return 0;
     }
     public float minDistance = 0.5f;
     private void Wander() //Predator traveling waypoints
@@ -104,9 +104,9 @@ public class Predator : Life
         while (lifeStates == LifeStates.Pursuit)
         {
             print("Predator are pursuing prey");
-            yield return 0;
+            
         }
-
+        yield return null;
     }
 
     private void Pursuit()
@@ -121,9 +121,9 @@ public class Predator : Life
         while (lifeStates == LifeStates.CollisionAvoidance)
         {
             print("Predator are avoiding obstacles");
-            yield return 0;
+            
         }
-
+        yield return null;
     }
 
     private void CollisionAvoidance()
@@ -132,6 +132,6 @@ public class Predator : Life
     }
     #endregion
 
-
+*/
 
 }

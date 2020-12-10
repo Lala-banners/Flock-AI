@@ -5,11 +5,12 @@ using UnityEngine;
 public class Prey : Life
 {
     protected float preySpeed;
-    private FlockBehavior wanderBehavior;
-    private FlockBehavior flockBehavior; //
-    private FlockBehavior hideBehavior; //
-    private FlockBehavior evadeBehavior; //other flock avoidance - make weight very high
+    [SerializeField] private FlockBehavior wanderBehavior;
+    [SerializeField] private FlockBehavior flockBehavior; //
+    [SerializeField] private FlockBehavior hideBehavior; //
+    [SerializeField] private FlockBehavior evadeBehavior; //other flock avoidance - make weight very high
     [SerializeField] private ContextFilter otherFlock; //for distinguishing between predator and prey
+    public Transform[] preyWanderPoint;
 
     #region Wander
     IEnumerator WanderState()
@@ -18,12 +19,12 @@ public class Prey : Life
         while (lifeStates == LifeStates.Wander)
         {
             print("Prey are wandering");
-            yield return 0;
         }
+        yield return null;
         NextState();
     }
 
-    private void Wander() 
+    private void Wander()
     {
 
     }
@@ -39,23 +40,18 @@ public class Prey : Life
             foreach (FlockAgent agent in flock.agents)
             {
                 List<Transform> filteredContext = (otherFlock == null) ? flock.context : otherFlock.Filter(agent, flock.context);
-                if (filteredContext.Count <= 0)
+                if (filteredContext.Count <= 0) //if count of other flock (predators) is less than 0 then go to wander behavior
                 {
                     lifeStates = LifeStates.Wander;
                 }
                 else
                 {
-
+                    //if prey cant evade then they will be eaten
                 }
             }
-            yield return 0;
         }
+        yield return null;
         NextState();
-    }
-
-    private void Evade()
-    {
-
     }
     #endregion
 
@@ -66,8 +62,8 @@ public class Prey : Life
         while (lifeStates == LifeStates.Hide)
         {
             print("Prey are hiding");
-            yield return 0;
         }
+        yield return null;
         NextState();
     }
 
@@ -84,8 +80,8 @@ public class Prey : Life
         while (lifeStates == LifeStates.Flock)
         {
             print("Prey are flocking");
-            yield return 0;
         }
+        yield return null;
         NextState();
     }
 
