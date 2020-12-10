@@ -6,10 +6,10 @@ public class Prey : Life
 {
     protected float preySpeed;
     private FlockBehavior wanderBehavior;
-    private FlockBehavior flockBehavior;
-    private FlockBehavior hideBehavior;
-    private FlockBehavior evadeBehavior;
-    [SerializeField] private ContextFilter otherFlock;
+    private FlockBehavior flockBehavior; //
+    private FlockBehavior hideBehavior; //
+    private FlockBehavior evadeBehavior; //other flock avoidance - make weight very high
+    [SerializeField] private ContextFilter otherFlock; //for distinguishing between predator and prey
 
     #region Wander
     IEnumerator WanderState()
