@@ -30,7 +30,7 @@ public class Predator : Life
         {
 
             print("Predator are eating prey");
-
+            yield return null;
         }
         yield return null;
     }
@@ -67,6 +67,7 @@ public class Predator : Life
                     lifeStates = LifeStates.Attack;
                 }
             }
+            yield return null;
         }
         NextState();
         yield return null;
