@@ -34,6 +34,7 @@ public class Prey : Life
                 i = 0;
             }
             flock.agentPrefab.Move(preyWanderPoint[i].position);
+            yield return null;
         }
         yield return null;
         NextState();
@@ -64,6 +65,7 @@ public class Prey : Life
                     //if prey cant evade then they will be eaten
                 }
             }
+            yield return null;
         }
         yield return null;
         NextState();
@@ -77,7 +79,9 @@ public class Prey : Life
         while (lifeStates == LifeStates.Hide)
         {
             print("Prey are hiding");
+            yield return null;
         }
+
         yield return null;
         NextState();
     }
@@ -95,6 +99,7 @@ public class Prey : Life
         while (lifeStates == LifeStates.Flock)
         {
             print("Prey are flocking");
+            yield return null;
         }
         yield return null;
         NextState();

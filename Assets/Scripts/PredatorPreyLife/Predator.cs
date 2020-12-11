@@ -96,7 +96,7 @@ public class Predator : Life
         while (lifeStates == LifeStates.Pursuit)
         {
             print("Predator are pursuing prey");
-
+            yield return null;
         }
         yield return null;
     }
@@ -113,7 +113,7 @@ public class Predator : Life
         while (lifeStates == LifeStates.CollisionAvoidance)
         {
             print("Predator are avoiding obstacles");
-
+            yield return null;
         }
         yield return null;
     }

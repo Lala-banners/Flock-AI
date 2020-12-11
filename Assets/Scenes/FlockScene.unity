@@ -1277,11 +1277,9 @@ MonoBehaviour:
   hideBehavior: {fileID: 11400000, guid: f0050e6c09a4ae54fbd14b9065ec993a, type: 2}
   evadeBehavior: {fileID: 11400000, guid: f0050e6c09a4ae54fbd14b9065ec993a, type: 2}
   otherFlock: {fileID: 11400000, guid: 26ee34276c4bded4fbd5bd2bfce7ebe8, type: 2}
-  preyWander:
-  - {fileID: 858875090}
-  - {fileID: 624712084}
-  - {fileID: 1921468384}
-  - {fileID: 104400487}
+  preyWanderPoint: []
+  i: 0
+  minDistance: 0.5
 --- !u!4 &1311678251
 Transform:
   m_ObjectHideFlags: 0
@@ -1303,7 +1301,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1311678249}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c7868c6a20ce89e42898c9be4394a0d2, type: 3}
   m_Name: 
@@ -1516,7 +1514,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1438710553}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c7868c6a20ce89e42898c9be4394a0d2, type: 3}
   m_Name: 
