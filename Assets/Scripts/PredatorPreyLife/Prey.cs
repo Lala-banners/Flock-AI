@@ -5,26 +5,28 @@ using UnityEngine;
 public class Prey : Life
 {
     protected float preySpeed;
+    [SerializeField] private CompositeBehavior[] preyBehaviors;
     [SerializeField] private FlockBehavior wanderBehavior;
-    [SerializeField] private FlockBehavior flockBehavior; //
-    [SerializeField] private FlockBehavior hideBehavior; //
+    [SerializeField] private FlockBehavior flockBehavior; //stay at home behavior
+    [SerializeField] private FlockBehavior hideBehavior; //hide behind obstacles
     [SerializeField] private FlockBehavior evadeBehavior; //other flock avoidance - make weight very high
     [SerializeField] private ContextFilter otherFlock; //for distinguishing between predator and prey
     public Transform[] preyWanderPoint;
-    public int i; //waypoint index
-    public float minDistance = 0.5f;
+    public Transform hidePoint;
+    [Tooltip("Prey Waypoint Index")] [SerializeField] private int i; //waypoint index
+    [SerializeField] private float minDistance = 0.5f;
 
     #region Wander
-    IEnumerator WanderState()
+    private IEnumerator WanderState()
     {
-        flock.behavior = wanderBehavior;
+        preyBehaviors[0] = (CompositeBehavior)wanderBehavior;
         while (lifeStates == LifeStates.Wander)
         {
             print("Prey are wandering");
             //Getting distance between the predator and the waypoints
             float distance = Vector2.Distance(transform.position, preyWanderPoint[i].transform.position);
 
-            //if distance between predator and waypoints is less than 0.5 then increase index of waypoints
+            //if distance between predator and waypoints is less than 0.5 then increase index of waypoints and go to next waypoint
             if (distance < minDistance)
             {
                 i++;
@@ -47,9 +49,9 @@ public class Prey : Life
     #endregion
 
     #region Evade
-    IEnumerator EvadeState()
+    private IEnumerator EvadeState()
     {
-        flock.behavior = evadeBehavior;
+        preyBehaviors[1] = (CompositeBehavior)evadeBehavior;
         while (lifeStates == LifeStates.Evade)
         {
             print("Prey are evading predator");
@@ -73,12 +75,17 @@ public class Prey : Life
     #endregion
 
     #region Hide
-    IEnumerator HideState()
+    private IEnumerator HideState() //Hide = go out of chase range
     {
-        flock.behavior = hideBehavior;
+        preyBehaviors[2] = (CompositeBehavior)hideBehavior;
         while (lifeStates == LifeStates.Hide)
         {
             print("Prey are hiding");
+            //Transform hideLocation = Vector2.MoveTowards(transform.position, target, preySpeed); 
+            //flock.agentPrefab.Move(hideLocation);
+
+            //Move prey flock to hide point (set outside predator range, only hide if there are less than 5 prey still alive)
+            flock.agentPrefab.Move(hidePoint.position);
             yield return null;
         }
 
@@ -93,9 +100,9 @@ public class Prey : Life
     #endregion
 
     #region Flock
-    IEnumerator FlockState()
+    private IEnumerator FlockState()
     {
-        flock.behavior = flockBehavior;
+        preyBehaviors[3] = (CompositeBehavior)flockBehavior;
         while (lifeStates == LifeStates.Flock)
         {
             print("Prey are flocking");

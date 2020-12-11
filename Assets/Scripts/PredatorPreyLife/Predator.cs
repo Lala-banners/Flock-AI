@@ -8,6 +8,7 @@ public class Predator : Life
     public FlockAgent agent;
     protected float predatorSpeed;
     public float damage;
+    [SerializeField] private CompositeBehavior[] predatorBehaviors;
     [SerializeField] private FlockBehavior seekBehavior; //if prey is in range, change to attack
     [SerializeField] private FlockBehavior attackBehavior; //while prey are in attacking range or if all prey is gone, change to wander
     [SerializeField] private ContextFilter otherFlock; //for distinguishing between predator and prey
@@ -17,9 +18,40 @@ public class Predator : Life
     public int index = 0;
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        
+        switch (lifeStates)
+        {
+            case LifeStates.Pursuit:
+                foreach (FlockAgent prey in flock.agents) //loop through flock agents
+                {
+                    if (flock.agents.Count <= 0) //if predators have eaten all prey
+                    {
+                        lifeStates = LifeStates.Wander; //go to wander state
+                    }
+                }
+                break;
+            case LifeStates.Attack:
+                foreach (FlockAgent prey in flock.agents) //loop through list of prey
+                {
+                    List<Transform> filteredContext = (otherFlock != null) ? flock.context : otherFlock.Filter(agent, flock.context); //Filter through other flock (prey)
+
+                    if (filteredContext.Count > minDistance) //if count of filtered flock (prey) is in range, then attack
+                    {
+                        lifeStates = LifeStates.Attack;
+                    }
+                    else //if prey not in range, predator wander
+                    {
+                        lifeStates = LifeStates.Wander;
+                    }
+                }
+                
+                break;
+            case LifeStates.CollisionAvoidance:
+                //Debug.Log("collision avoidance");
+                break;
+        }
+
     }
 
 
@@ -45,6 +77,8 @@ public class Predator : Life
     #region Wander
     private IEnumerator WanderState() //make predator travel path
     {
+        Wander();
+
         while (lifeStates == LifeStates.Wander) //while in wander state
         {
             print("Predators are wandering");

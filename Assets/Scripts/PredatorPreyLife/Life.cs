@@ -41,7 +41,7 @@ public class Life : MonoBehaviour
             Debug.LogError("No Flock in scene");
             return;
         }
-        NextState();
+        //NextState();
     }
 
     //Function for calling the next state
