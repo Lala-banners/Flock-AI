@@ -1379,10 +1379,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 268d9626bcf2cb545b54f279bd871faa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lifeStates: 3
+  lifeStates: 0
   changeState: 0
   flock: {fileID: 324942937}
-  wanderBehavior: {fileID: 11400000, guid: a4f5073dd7b05da4a9d038f5aa421f29, type: 2}
+  wanderBehavior: {fileID: 11400000, guid: cdde058ff98d9de48b86f69d45b69410, type: 2}
   flockBehavior: {fileID: 11400000, guid: 101b6190fa28c6d42ad7a6d14b0e83bf, type: 2}
   hideBehavior: {fileID: 11400000, guid: f0050e6c09a4ae54fbd14b9065ec993a, type: 2}
   evadeBehavior: {fileID: 11400000, guid: f0050e6c09a4ae54fbd14b9065ec993a, type: 2}
@@ -1395,6 +1395,9 @@ MonoBehaviour:
   hidePoint: {fileID: 0}
   i: 0
   minDistance: 0.5
+  flockRadius: 5
+  wanderRadius: 5
+  evadeRadius: 5
 --- !u!4 &1311678251
 Transform:
   m_ObjectHideFlags: 0

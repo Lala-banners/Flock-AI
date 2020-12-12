@@ -16,8 +16,25 @@ public class Prey : Life
     [Tooltip("Prey Waypoint Index")] [SerializeField] private int i; //waypoint index
     [SerializeField] private float minDistance = 0.5f;
 
+    [Header("Prey Radius\'")]
+    [SerializeField]
+    private float flockRadius = 5f;
+    [SerializeField]
+    private float wanderRadius = 5f;
+    [SerializeField]
+    private float evadeRadius = 5f;
+
     protected override float GetRadius()
     {
+        switch(lifeStates)
+        {
+            case LifeStates.Flock:
+                return flockRadius;
+            case LifeStates.Wander:
+                return wanderRadius;
+            case LifeStates.Evade:
+                return evadeRadius;
+        }
         return fleeRadius;
     }
 
@@ -27,6 +44,15 @@ public class Prey : Life
         while (lifeStates == LifeStates.Wander)
         {
             print("Prey are wandering");
+
+            foreach (FlockAgent agent in flock.agents)
+            {
+                Vector2 velocity = wanderBehavior.CalculateMove(agent, GetNearbyObjects(agent), flock);
+                agent.Move(velocity);
+            }
+
+            yield return null;
+
             //Getting distance between the predator and the waypoints
             float distance = Vector2.Distance(transform.position, preyWanderPoint[i].transform.position);
 
@@ -69,6 +95,9 @@ public class Prey : Life
                 {
                     //if prey cant evade then they will be eaten
                 }
+
+                Vector2 velocity = evadeBehavior.CalculateMove(agent, GetNearbyObjects(agent), flock);
+                agent.Move(velocity);
             }
             yield return null;
         }
