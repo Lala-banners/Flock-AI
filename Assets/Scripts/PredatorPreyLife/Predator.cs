@@ -17,6 +17,11 @@ public class Predator : Life
     public Transform[] wanderPoints;
     public int index = 0;
 
+    protected override float GetRadius()
+    {
+        return chaseRadius;
+    }
+
     // Update is called once per frame
     private void Update()
     {

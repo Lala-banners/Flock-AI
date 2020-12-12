@@ -19,7 +19,7 @@ public enum LifeStates //contains both predator and prey states
 
 }
 
-public class Life : MonoBehaviour
+public abstract class Life : MonoBehaviour
 {
     [Header("Life Stats")] //Stats that both Predator and Prey have
     public LifeStates lifeStates;
@@ -32,6 +32,8 @@ public class Life : MonoBehaviour
     //Connection to Flock script
     [SerializeField] protected Flock flock;
 
+    protected abstract float GetRadius();
+
     virtual protected void Start()
     {
         flock = GetComponent<Flock>(); //Getting reference to Flock
@@ -41,7 +43,7 @@ public class Life : MonoBehaviour
             Debug.LogError("No Flock in scene");
             return;
         }
-        //NextState();
+        NextState();
     }
 
     //Function for calling the next state
@@ -57,5 +59,25 @@ public class Life : MonoBehaviour
         StartCoroutine((IEnumerator)info.Invoke(this, null));
         //Using StartCoroutine() means we can leave and come back to the method that is running
         //All Coroutines must return IEnumerator
+    }
+
+    protected List<Transform> GetNearbyObjects(FlockAgent agent)
+    {
+        //Empty list that we will write to
+        List<Transform> context = new List<Transform>();
+        //Make an over lap circle around the agents
+        //Each agent will do a circle
+        //Needs a NeighborRadius 
+        Collider2D[] contextColliders = Physics2D.OverlapCircleAll(agent.transform.position, GetRadius());
+        foreach (Collider2D c in contextColliders)
+        {
+            //If the circle that collides with everything around it is NOT Agent collider
+            //Add to the context
+            if (c != agent.AgentCollider)
+            {
+                context.Add(c.transform);
+            }
+        }
+        return context;
     }
 }

@@ -5,7 +5,7 @@ using UnityEngine;
 public class Prey : Life
 {
     protected float preySpeed;
-    [SerializeField] private CompositeBehavior[] preyBehaviors;
+    //[SerializeField] private CompositeBehavior[] preyBehaviors;
     [SerializeField] private FlockBehavior wanderBehavior;
     [SerializeField] private FlockBehavior flockBehavior; //stay at home behavior
     [SerializeField] private FlockBehavior hideBehavior; //hide behind obstacles
@@ -16,10 +16,14 @@ public class Prey : Life
     [Tooltip("Prey Waypoint Index")] [SerializeField] private int i; //waypoint index
     [SerializeField] private float minDistance = 0.5f;
 
+    protected override float GetRadius()
+    {
+        return fleeRadius;
+    }
+
     #region Wander
     private IEnumerator WanderState()
     {
-        preyBehaviors[0] = (CompositeBehavior)wanderBehavior;
         while (lifeStates == LifeStates.Wander)
         {
             print("Prey are wandering");
@@ -51,7 +55,6 @@ public class Prey : Life
     #region Evade
     private IEnumerator EvadeState()
     {
-        preyBehaviors[1] = (CompositeBehavior)evadeBehavior;
         while (lifeStates == LifeStates.Evade)
         {
             print("Prey are evading predator");
@@ -77,7 +80,6 @@ public class Prey : Life
     #region Hide
     private IEnumerator HideState() //Hide = go out of chase range
     {
-        preyBehaviors[2] = (CompositeBehavior)hideBehavior;
         while (lifeStates == LifeStates.Hide)
         {
             print("Prey are hiding");
@@ -102,10 +104,15 @@ public class Prey : Life
     #region Flock
     private IEnumerator FlockState()
     {
-        preyBehaviors[3] = (CompositeBehavior)flockBehavior;
         while (lifeStates == LifeStates.Flock)
         {
             print("Prey are flocking");
+            foreach (FlockAgent agent in flock.agents)
+            {
+                Vector2 velocity = flockBehavior.CalculateMove(agent, GetNearbyObjects(agent), flock);
+                agent.Move(velocity);
+            }
+            
             yield return null;
         }
         yield return null;

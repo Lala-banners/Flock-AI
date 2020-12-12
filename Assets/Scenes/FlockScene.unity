@@ -564,7 +564,7 @@ MonoBehaviour:
   behavior: {fileID: 11400000, guid: 2efcd68aca0eecb4cb593e922743e159, type: 2}
   startingCount: 20
   driveFactor: 10
-  maxSpeed: 5
+  maxSpeed: 1
   neighborRadius: 7
   avoidanceRadiusMultiplier: 0.1
   smallRadiusMultiplier: 0.3
@@ -1379,10 +1379,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 268d9626bcf2cb545b54f279bd871faa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lifeStates: 0
+  lifeStates: 3
   changeState: 0
   flock: {fileID: 324942937}
-  preyBehaviors: []
   wanderBehavior: {fileID: 11400000, guid: a4f5073dd7b05da4a9d038f5aa421f29, type: 2}
   flockBehavior: {fileID: 11400000, guid: 101b6190fa28c6d42ad7a6d14b0e83bf, type: 2}
   hideBehavior: {fileID: 11400000, guid: f0050e6c09a4ae54fbd14b9065ec993a, type: 2}
@@ -1419,7 +1418,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1311678249}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c7868c6a20ce89e42898c9be4394a0d2, type: 3}
+  m_Script: {fileID: 11500000, guid: 65df74790cd3049449b885847a180adf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   agentPrefab: {fileID: 5112794619473145483, guid: 51328db0d762bb947ab264e1e52965e5,
@@ -1428,7 +1427,7 @@ MonoBehaviour:
   behavior: {fileID: 11400000, guid: 2efcd68aca0eecb4cb593e922743e159, type: 2}
   startingCount: 20
   driveFactor: 10
-  maxSpeed: 5
+  maxSpeed: 1
   neighborRadius: 1.5
   avoidanceRadiusMultiplier: 0.5
   smallRadiusMultiplier: 0.2
@@ -1633,7 +1632,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1438710553}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c7868c6a20ce89e42898c9be4394a0d2, type: 3}
+  m_Script: {fileID: 11500000, guid: 65df74790cd3049449b885847a180adf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   agentPrefab: {fileID: 5112794619473145483, guid: 33e225d3234a2614ba3e2dc6d11be897,

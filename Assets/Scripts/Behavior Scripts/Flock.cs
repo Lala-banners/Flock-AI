@@ -68,7 +68,7 @@ public class Flock : MonoBehaviour
 
     public List<Transform> context = new List<Transform>();
 
-    private void Update()
+    protected virtual void Update()
     {
 
         //Be careful with loop within loops (Loopception)
