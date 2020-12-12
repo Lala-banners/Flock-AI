@@ -10,7 +10,7 @@ public class Prey : Life
     [SerializeField] private FlockBehavior flockBehavior; //stay at home behavior
     [SerializeField] private FlockBehavior hideBehavior; //hide behind obstacles
     [SerializeField] private FlockBehavior evadeBehavior; //other flock avoidance - make weight very high
-    [SerializeField] private ContextFilter otherFlock; //for distinguishing between predator and prey
+    private ContextFilter otherFlock; //for distinguishing between predator and prey
     public Transform[] preyWanderPoint;
     public Transform hidePoint;
     [Tooltip("Prey Waypoint Index")] [SerializeField] private int i; //waypoint index

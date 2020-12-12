@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56baafb98146cca41ace3386064f5a4c, type: 3}
+  m_Name: Attack Comp
+  m_EditorClassIdentifier: 
+  behaviors:
+  - behaviors: {fileID: 11400000, guid: 896bade168389db43bed3eabaf4ae43c, type: 2}
+    weights: 10
+  - behaviors: {fileID: 11400000, guid: d59c30e2106b7ea4aa29f1a066850909, type: 2}
+    weights: 2
+  - behaviors: {fileID: 11400000, guid: cf82f3a3529bb4f4b8f2ca6fbe124682, type: 2}
+    weights: 4
+  - behaviors: {fileID: 11400000, guid: 19b135f2a3c9ce940843191c9226fdb7, type: 2}
+    weights: 3

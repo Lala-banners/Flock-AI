@@ -8,10 +8,11 @@ public class Predator : Life
     public FlockAgent agent;
     protected float predatorSpeed;
     public float damage;
-    [SerializeField] private CompositeBehavior[] predatorBehaviors;
-    [SerializeField] private FlockBehavior seekBehavior; //if prey is in range, change to attack
+    //[SerializeField] private CompositeBehavior[] predatorBehaviors;
+    [SerializeField] private FlockBehavior pursuitBehavior; //if prey is in range, change to attack
     [SerializeField] private FlockBehavior attackBehavior; //while prey are in attacking range or if all prey is gone, change to wander
-    [SerializeField] private ContextFilter otherFlock; //for distinguishing between predator and prey
+    [SerializeField] private FlockBehavior wanderBehavior; //wander
+    private ContextFilter otherFlock; //for distinguishing between predator and prey
     [SerializeField] private ContextFilter obstacleAvoidance; //for collision avoidance
     public Prey prey;
     public Transform[] wanderPoints;
@@ -19,7 +20,15 @@ public class Predator : Life
 
     protected override float GetRadius()
     {
+        switch (lifeStates)
+        {
+            case LifeStates.Attack:
+                return attackRadius;
+            case LifeStates.Pursuit:
+                return chaseRadius;
+        }
         return chaseRadius;
+
     }
 
     // Update is called once per frame
@@ -41,9 +50,9 @@ public class Predator : Life
                 {
                     List<Transform> filteredContext = (otherFlock != null) ? flock.context : otherFlock.Filter(agent, flock.context); //Filter through other flock (prey)
 
-                    if (filteredContext.Count > minDistance) //if count of filtered flock (prey) is in range, then attack
+                    if (filteredContext.Count > minDistance) //if count of filtered flock (prey) is in range, then pursue 
                     {
-                        lifeStates = LifeStates.Attack;
+                        lifeStates = LifeStates.Pursuit;
                     }
                     else //if prey not in range, predator wander
                     {
@@ -65,19 +74,28 @@ public class Predator : Life
     {
         while (lifeStates == LifeStates.Attack)
         {
-
             print("Predator are eating prey");
+            if (prey.gameObject.tag == "Prey" && this.gameObject.tag == "Predator")
+            {
+                Vector2 velocity = attackBehavior.CalculateMove(agent, GetNearbyObjects(agent), flock);
+                agent.Move(velocity);
+                Destroy(prey.gameObject);
+
+                if(prey == null)
+                {
+                    Debug.Log("Prey have all been eaten");
+                    lifeStates = LifeStates.Wander; //go to wander state
+                }
+                else
+                {
+
+                }
+            }
             yield return null;
         }
         yield return null;
     }
-
-    private void Attack()
-    {
-
-    }
     #endregion
-
 
     #region Wander
     private IEnumerator WanderState() //make predator travel path
@@ -140,11 +158,6 @@ public class Predator : Life
         }
         yield return null;
     }
-
-    private void Pursuit()
-    {
-
-    }
     #endregion
 
     #region Collision Avoidance
@@ -156,11 +169,6 @@ public class Predator : Life
             yield return null;
         }
         yield return null;
-    }
-
-    private void CollisionAvoidance()
-    {
-
     }
     #endregion
 

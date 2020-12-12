@@ -1384,20 +1384,19 @@ MonoBehaviour:
   flock: {fileID: 324942937}
   wanderBehavior: {fileID: 11400000, guid: cdde058ff98d9de48b86f69d45b69410, type: 2}
   flockBehavior: {fileID: 11400000, guid: 101b6190fa28c6d42ad7a6d14b0e83bf, type: 2}
-  hideBehavior: {fileID: 11400000, guid: f0050e6c09a4ae54fbd14b9065ec993a, type: 2}
-  evadeBehavior: {fileID: 11400000, guid: f0050e6c09a4ae54fbd14b9065ec993a, type: 2}
-  otherFlock: {fileID: 11400000, guid: 26ee34276c4bded4fbd5bd2bfce7ebe8, type: 2}
+  hideBehavior: {fileID: 11400000, guid: 6f062cc755f5e024da349109fee2f963, type: 2}
+  evadeBehavior: {fileID: 11400000, guid: 12311b34d8923cf448313faff97b8f9d, type: 2}
   preyWanderPoint:
   - {fileID: 858875090}
   - {fileID: 624712084}
   - {fileID: 1921468384}
   - {fileID: 104400487}
-  hidePoint: {fileID: 0}
+  hidePoint: {fileID: 822343458}
   i: 0
   minDistance: 0.5
   flockRadius: 5
-  wanderRadius: 5
-  evadeRadius: 5
+  wanderRadius: 8
+  evadeRadius: 2
 --- !u!4 &1311678251
 Transform:
   m_ObjectHideFlags: 0
@@ -1599,10 +1598,9 @@ MonoBehaviour:
   flock: {fileID: 1156301579}
   agent: {fileID: 5112794619473145483, guid: 33e225d3234a2614ba3e2dc6d11be897, type: 3}
   damage: 100
-  predatorBehaviors: []
-  seekBehavior: {fileID: 0}
-  attackBehavior: {fileID: 11400000, guid: 896bade168389db43bed3eabaf4ae43c, type: 2}
-  otherFlock: {fileID: 11400000, guid: 26ee34276c4bded4fbd5bd2bfce7ebe8, type: 2}
+  pursuitBehavior: {fileID: 11400000, guid: 896bade168389db43bed3eabaf4ae43c, type: 2}
+  attackBehavior: {fileID: 11400000, guid: 142a4ca50b57aa042ad0d65c2d48d7ce, type: 2}
+  wanderBehavior: {fileID: 11400000, guid: cdde058ff98d9de48b86f69d45b69410, type: 2}
   obstacleAvoidance: {fileID: 11400000, guid: 644e9f27383085f40b8fc37a46219edf, type: 2}
   prey: {fileID: 1311678250}
   wanderPoints:
