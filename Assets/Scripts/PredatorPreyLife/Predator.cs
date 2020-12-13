@@ -44,6 +44,7 @@ public class Predator : Life
                     {
                         lifeStates = LifeStates.Wander; //go to wander state
                     }
+                    //yield return null;
                 }
                 break;
             case LifeStates.Attack:
@@ -61,9 +62,8 @@ public class Predator : Life
                     {
                         lifeStates = LifeStates.Wander;
                     }
-                    return;
+                    //yield return null;
                 }
-
                 break;
             case LifeStates.CollisionAvoidance:
                 foreach (FlockAgent agent in flock.agents)
@@ -71,6 +71,7 @@ public class Predator : Life
                     print(stateText + LifeStates.CollisionAvoidance.ToString());
                     Vector2 velocity = obstacleAvoid.CalculateMove(agent, GetNearbyObjects(agent), flock);
                     agent.Move(velocity);
+                    //yield return null;
                 }
                 break;
 
@@ -79,6 +80,7 @@ public class Predator : Life
                 {
                     Vector2 velocity = wanderBehavior.CalculateMove(agent, GetNearbyObjects(agent), flock);
                     agent.Move(velocity);
+                    //yield return null;
                 }
                 break;
         }
@@ -97,8 +99,8 @@ public class Predator : Life
                 Vector2 velocity = attackBehavior.CalculateMove(agent, GetNearbyObjects(agent), flock);
                 agent.Move(velocity);
                 Destroy(prey.gameObject);
-
-                if(prey == null)
+                yield return null;
+                if (prey == null)
                 {
                     Debug.Log("Prey have all been eaten");
                     lifeStates = LifeStates.Wander; //go to wander state
@@ -153,6 +155,7 @@ public class Predator : Life
         {
             Vector2 velocity = wanderBehavior.CalculateMove(agent, GetNearbyObjects(agent), flock);
             agent.Move(velocity);
+            //yield return null;
         }
         //Getting distance between the predator and the waypoints
         float distance = Vector2.Distance(transform.position, wanderPoints[index].transform.position);
@@ -180,6 +183,7 @@ public class Predator : Life
             {
                 Vector2 velocity = pursuitBehavior.CalculateMove(agent, GetNearbyObjects(agent), flock);
                 agent.Move(velocity);
+                yield return null;
             }
             print("Predator are pursuing prey");
             yield return null;
@@ -197,9 +201,10 @@ public class Predator : Life
             {
                 Vector2 velocity = obstacleAvoid.CalculateMove(agent, GetNearbyObjects(agent), flock);
                 agent.Move(velocity);
+                yield return null;
             }
             print("Predator are avoiding obstacles");
-            yield return null;
+            
         }
         yield return null;
     }
