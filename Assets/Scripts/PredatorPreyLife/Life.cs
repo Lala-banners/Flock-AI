@@ -27,7 +27,7 @@ public abstract class Life : MonoBehaviour
     protected float speed = 10; //prey speed
     protected float attackStrength; //for predator to attack prey
     protected float chaseRadius = 10f; //for predator to chase prey
-    protected float attackRadius = 5f; //for predator to chase prey
+    protected float attackRadius = 5f; //for predator to attack prey
     protected float fleeRadius = 10f; //for prey to flee predator
 
     //Connection to Flock script

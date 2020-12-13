@@ -1,19 +1,20 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class Predator : Life
 {
     [Header("Predator")]
+    public TMP_Text stateText;
     public FlockAgent agent;
     protected float predatorSpeed;
     public float damage;
-    //[SerializeField] private CompositeBehavior[] predatorBehaviors;
     [SerializeField] private FlockBehavior pursuitBehavior; //if prey is in range, change to attack
     [SerializeField] private FlockBehavior attackBehavior; //while prey are in attacking range or if all prey is gone, change to wander
     [SerializeField] private FlockBehavior wanderBehavior; //wander
-    private ContextFilter otherFlock; //for distinguishing between predator and prey
-    [SerializeField] private ContextFilter obstacleAvoidance; //for collision avoidance
+    [SerializeField] private ContextFilter otherFlock; //for distinguishing between predator and prey
+    [SerializeField] private FlockBehavior obstacleAvoid; //wander
     public Prey prey;
     public Transform[] wanderPoints;
     public int index = 0;
@@ -37,7 +38,7 @@ public class Predator : Life
         switch (lifeStates)
         {
             case LifeStates.Pursuit:
-                foreach (FlockAgent prey in flock.agents) //loop through flock agents
+                foreach (FlockAgent agent in flock.agents) //loop through flock agents
                 {
                     if (flock.agents.Count <= 0) //if predators have eaten all prey
                     {
@@ -46,26 +47,41 @@ public class Predator : Life
                 }
                 break;
             case LifeStates.Attack:
-                foreach (FlockAgent prey in flock.agents) //loop through list of prey
+                foreach (FlockAgent agent in flock.agents) //loop through list of prey
                 {
-                    List<Transform> filteredContext = (otherFlock != null) ? flock.context : otherFlock.Filter(prey, flock.context); //Filter through other flock (prey)
+                    //otherFlock = prey;
+                    AttackState();
+                    List<Transform> filteredContext = (otherFlock != null) ? flock.context : otherFlock.Filter(agent, flock.context); //Filter through other flock (prey)
 
                     if (filteredContext.Count > minDistance) //if count of filtered flock (prey) is in range, then pursue 
                     {
-                        lifeStates = LifeStates.Pursuit;
+                        lifeStates = LifeStates.Attack;
                     }
                     else //if prey not in range, predator wander
                     {
                         lifeStates = LifeStates.Wander;
                     }
+                    return;
                 }
-                
+
                 break;
             case LifeStates.CollisionAvoidance:
-                //Debug.Log("collision avoidance");
+                foreach (FlockAgent agent in flock.agents)
+                {
+                    print(stateText + LifeStates.CollisionAvoidance.ToString());
+                    Vector2 velocity = obstacleAvoid.CalculateMove(agent, GetNearbyObjects(agent), flock);
+                    agent.Move(velocity);
+                }
+                break;
+
+            case LifeStates.Wander:
+                foreach (FlockAgent agent in flock.agents)
+                {
+                    Vector2 velocity = wanderBehavior.CalculateMove(agent, GetNearbyObjects(agent), flock);
+                    agent.Move(velocity);
+                }
                 break;
         }
-
     }
 
 
@@ -75,7 +91,8 @@ public class Predator : Life
         while (lifeStates == LifeStates.Attack)
         {
             print("Predator are eating prey");
-            if (prey.gameObject.tag == "Prey" && gameObject.CompareTag("Predator"))
+            stateText.text = "Predator State: " + LifeStates.Attack.ToString();
+            if (prey.tag == "Prey" && gameObject.CompareTag("Predator"))
             {
                 Vector2 velocity = attackBehavior.CalculateMove(agent, GetNearbyObjects(agent), flock);
                 agent.Move(velocity);
@@ -100,11 +117,11 @@ public class Predator : Life
     #region Wander
     private IEnumerator WanderState() //make predator travel path
     {
-        Wander();
 
         while (lifeStates == LifeStates.Wander) //while in wander state
         {
             print("Predators are wandering");
+            stateText.text = "Predator State: " + LifeStates.Wander.ToString();
             foreach (FlockAgent agent in flock.agents) //go through list of agents in FlockAgent
             {
                 //Filter through the list of agents and find prey (other flock)
@@ -153,6 +170,7 @@ public class Predator : Life
     {
         while (lifeStates == LifeStates.Pursuit)
         {
+            stateText.text = "Predator State: " + LifeStates.Pursuit.ToString();
             print("Predator are pursuing prey");
             yield return null;
         }
@@ -165,6 +183,8 @@ public class Predator : Life
     {
         while (lifeStates == LifeStates.CollisionAvoidance)
         {
+            Vector2 velocity = obstacleAvoid.CalculateMove(agent, GetNearbyObjects(agent), flock);
+            agent.Move(velocity);
             print("Predator are avoiding obstacles");
             yield return null;
         }
