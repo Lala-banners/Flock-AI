@@ -170,6 +170,7 @@ public class Predator : Life
                     else
                     {
                         lifeStates = LifeStates.Attack;
+                        continue;
                     }
                 }
             }
