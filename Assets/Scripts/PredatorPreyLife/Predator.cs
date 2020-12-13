@@ -147,8 +147,13 @@ public class Predator : Life
         yield return null;
     }
     public float minDistance = 0.5f;
-    private void Wander() //Predator traveling waypoints
+    private void Wander() 
     {
+        foreach (FlockAgent agent in flock.agents)
+        {
+            Vector2 velocity = wanderBehavior.CalculateMove(agent, GetNearbyObjects(agent), flock);
+            agent.Move(velocity);
+        }
         //Getting distance between the predator and the waypoints
         float distance = Vector2.Distance(transform.position, wanderPoints[index].transform.position);
 
@@ -161,7 +166,7 @@ public class Predator : Life
         {
             index = 0;
         }
-        flock.agentPrefab.Move(wanderPoints[index].position);
+        //flock.agentPrefab.Move(wanderPoints[index].position);
     }
     #endregion
 
@@ -171,6 +176,11 @@ public class Predator : Life
         while (lifeStates == LifeStates.Pursuit)
         {
             stateText.text = "Predator State: " + LifeStates.Pursuit.ToString();
+            foreach (FlockAgent agent in flock.agents)
+            {
+                Vector2 velocity = pursuitBehavior.CalculateMove(agent, GetNearbyObjects(agent), flock);
+                agent.Move(velocity);
+            }
             print("Predator are pursuing prey");
             yield return null;
         }
@@ -183,8 +193,11 @@ public class Predator : Life
     {
         while (lifeStates == LifeStates.CollisionAvoidance)
         {
-            Vector2 velocity = obstacleAvoid.CalculateMove(agent, GetNearbyObjects(agent), flock);
-            agent.Move(velocity);
+            foreach (FlockAgent agent in flock.agents)
+            {
+                Vector2 velocity = obstacleAvoid.CalculateMove(agent, GetNearbyObjects(agent), flock);
+                agent.Move(velocity);
+            }
             print("Predator are avoiding obstacles");
             yield return null;
         }
