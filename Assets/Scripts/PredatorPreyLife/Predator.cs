@@ -48,7 +48,7 @@ public class Predator : Life
             case LifeStates.Attack:
                 foreach (FlockAgent prey in flock.agents) //loop through list of prey
                 {
-                    List<Transform> filteredContext = (otherFlock != null) ? flock.context : otherFlock.Filter(agent, flock.context); //Filter through other flock (prey)
+                    List<Transform> filteredContext = (otherFlock != null) ? flock.context : otherFlock.Filter(prey, flock.context); //Filter through other flock (prey)
 
                     if (filteredContext.Count > minDistance) //if count of filtered flock (prey) is in range, then pursue 
                     {
@@ -75,7 +75,7 @@ public class Predator : Life
         while (lifeStates == LifeStates.Attack)
         {
             print("Predator are eating prey");
-            if (prey.gameObject.tag == "Prey" && this.gameObject.tag == "Predator")
+            if (prey.gameObject.tag == "Prey" && gameObject.CompareTag("Predator"))
             {
                 Vector2 velocity = attackBehavior.CalculateMove(agent, GetNearbyObjects(agent), flock);
                 agent.Move(velocity);
@@ -88,7 +88,7 @@ public class Predator : Life
                 }
                 else
                 {
-
+                    DontDestroyOnLoad(prey);
                 }
             }
             yield return null;

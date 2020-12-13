@@ -65,16 +65,11 @@ public class Prey : Life
             {
                 i = 0;
             }
-            flock.agentPrefab.Move(preyWanderPoint[i].position);
+            //flock.agentPrefab.Move(preyWanderPoint[i].position);
             yield return null;
         }
         yield return null;
         NextState();
-    }
-
-    private void Wander()
-    {
-
     }
     #endregion
 
@@ -112,21 +107,16 @@ public class Prey : Life
         while (lifeStates == LifeStates.Hide)
         {
             print("Prey are hiding");
-            //Transform hideLocation = Vector2.MoveTowards(transform.position, target, preySpeed); 
-            //flock.agentPrefab.Move(hideLocation);
-
-            //Move prey flock to hide point (set outside predator range, only hide if there are less than 5 prey still alive)
-            flock.agentPrefab.Move(hidePoint.position);
+            foreach (FlockAgent agent in flock.agents)
+            {
+                Vector2 velocity = hideBehavior.CalculateMove(agent, GetNearbyObjects(agent), flock);
+                agent.Move(velocity);
+            }
             yield return null;
         }
 
         yield return null;
         NextState();
-    }
-
-    private void Hide()
-    {
-
     }
     #endregion
 
@@ -146,11 +136,6 @@ public class Prey : Life
         }
         yield return null;
         NextState();
-    }
-
-    private void Flock()
-    {
-
     }
     #endregion
 
