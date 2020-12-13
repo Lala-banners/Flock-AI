@@ -25,9 +25,14 @@ public class Prey : Life
     [SerializeField]
     private float evadeRadius = 5f;
 
+    public Flock GetFlock()
+    {
+        return flock;
+    }
+
     protected override float GetRadius()
     {
-        switch(lifeStates)
+        switch (lifeStates)
         {
             case LifeStates.Flock:
                 return flockRadius;
@@ -66,7 +71,6 @@ public class Prey : Life
              flock.agentPrefab.Move(preyWanderPoint[i].position);*/
             #endregion
             yield return null;
-            NextState();
         }
         yield return null;
         NextState();
@@ -130,7 +134,7 @@ public class Prey : Life
                 Vector2 velocity = flockBehavior.CalculateMove(agent, GetNearbyObjects(agent), flock);
                 agent.Move(velocity);
             }
-            
+
             yield return null;
         }
         yield return null;

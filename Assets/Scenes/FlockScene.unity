@@ -474,7 +474,7 @@ Transform:
   - {fileID: 425687631}
   - {fileID: 1689934307}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &136857893
 GameObject:
@@ -505,7 +505,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &136857895
 MonoBehaviour:
@@ -613,7 +613,7 @@ RectTransform:
   - {fileID: 6684923}
   - {fileID: 1536770962}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -679,59 +679,6 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 305484052}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &324942936
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 324942938}
-  - component: {fileID: 324942937}
-  m_Layer: 0
-  m_Name: Blue Prey
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!114 &324942937
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 324942936}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c7868c6a20ce89e42898c9be4394a0d2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  agentPrefab: {fileID: 0}
-  agents: []
-  behavior: {fileID: 11400000, guid: 2efcd68aca0eecb4cb593e922743e159, type: 2}
-  startingCount: 20
-  driveFactor: 10
-  maxSpeed: 1
-  neighborRadius: 7
-  avoidanceRadiusMultiplier: 0.1
-  smallRadiusMultiplier: 0.3
-  context: []
---- !u!4 &324942938
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 324942936}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -1086,7 +1033,7 @@ Transform:
   - {fileID: 469524559}
   - {fileID: 1137707916}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &822343457
 GameObject:
@@ -1116,7 +1063,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &830151720
 GameObject:
@@ -1284,7 +1231,7 @@ Transform:
   - {fileID: 1921468384}
   - {fileID: 104400487}
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1045145724
 GameObject:
@@ -1451,59 +1398,6 @@ MonoBehaviour:
   - {fileID: 1137707916}
   radius: 0
   gizmoSize: {x: 0, y: 0, z: 0}
---- !u!1 &1156301577
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1156301578}
-  - component: {fileID: 1156301579}
-  m_Layer: 0
-  m_Name: Red Predator
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &1156301578
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1156301577}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1156301579
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1156301577}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c7868c6a20ce89e42898c9be4394a0d2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  agentPrefab: {fileID: 0}
-  agents: []
-  behavior: {fileID: 11400000, guid: 3f319668cc12b2343a2c3628e501f240, type: 2}
-  startingCount: 50
-  driveFactor: 10
-  maxSpeed: 5
-  neighborRadius: 7
-  avoidanceRadiusMultiplier: 0.1
-  smallRadiusMultiplier: 0.3
-  context: []
 --- !u!1 &1311678249
 GameObject:
   m_ObjectHideFlags: 0
@@ -1536,7 +1430,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lifeStates: 0
   changeState: 0
-  flock: {fileID: 324942937}
+  flock: {fileID: 1311678252}
   preyStateText: {fileID: 1536770963}
   wanderBehavior: {fileID: 11400000, guid: cdde058ff98d9de48b86f69d45b69410, type: 2}
   flockBehavior: {fileID: 11400000, guid: 101b6190fa28c6d42ad7a6d14b0e83bf, type: 2}
@@ -1566,7 +1460,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1311678252
 MonoBehaviour:
@@ -1584,7 +1478,7 @@ MonoBehaviour:
     type: 3}
   agents: []
   behavior: {fileID: 11400000, guid: 2efcd68aca0eecb4cb593e922743e159, type: 2}
-  startingCount: 20
+  startingCount: 80
   driveFactor: 10
   maxSpeed: 15
   neighborRadius: 1.5
@@ -1752,11 +1646,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lifeStates: 0
   changeState: 0
-  flock: {fileID: 1156301579}
+  flock: {fileID: 1438710556}
   stateText: {fileID: 6684924}
   agent: {fileID: 5112794619473145483, guid: 33e225d3234a2614ba3e2dc6d11be897, type: 3}
   damage: 100
-  pursuitBehavior: {fileID: 11400000, guid: 896bade168389db43bed3eabaf4ae43c, type: 2}
+  pursuitBehavior: {fileID: 11400000, guid: 4ab6755b011cff54ea9eee1fc4d5f51d, type: 2}
   attackBehavior: {fileID: 11400000, guid: 142a4ca50b57aa042ad0d65c2d48d7ce, type: 2}
   wanderBehavior: {fileID: 11400000, guid: cdde058ff98d9de48b86f69d45b69410, type: 2}
   otherFlock: {fileID: 11400000, guid: 26ee34276c4bded4fbd5bd2bfce7ebe8, type: 2}
@@ -1768,7 +1662,6 @@ MonoBehaviour:
   - {fileID: 469524559}
   - {fileID: 1137707916}
   index: 0
-  minDistance: 0.5
 --- !u!4 &1438710555
 Transform:
   m_ObjectHideFlags: 0
@@ -1777,11 +1670,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1438710553}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 9.26, y: 4.57, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1438710556
 MonoBehaviour:
@@ -1799,9 +1692,9 @@ MonoBehaviour:
     type: 3}
   agents: []
   behavior: {fileID: 11400000, guid: 3f319668cc12b2343a2c3628e501f240, type: 2}
-  startingCount: 10
+  startingCount: 100
   driveFactor: 10
-  maxSpeed: 10
+  maxSpeed: 20
   neighborRadius: 1.5
   avoidanceRadiusMultiplier: 0.5
   smallRadiusMultiplier: 0.2

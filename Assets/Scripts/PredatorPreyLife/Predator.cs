@@ -23,46 +23,28 @@ public class Predator : Life
     {
         switch (lifeStates)
         {
-            case LifeStates.Attack:
-                return attackRadius;
             case LifeStates.Pursuit:
                 return chaseRadius;
         }
         return chaseRadius;
-
     }
 
     // Update is called once per frame
     private void Update()
     {
-        switch (lifeStates)
+        #region (Old)
+        /*switch (lifeStates)
         {
             case LifeStates.Pursuit:
-                foreach (FlockAgent agent in flock.agents) //loop through flock agents
+                foreach (FlockAgent preyAgent in prey.GetFlock().agents) //loop through flock agents
                 {
-                    if (flock.agents.Count <= 0) //if predators have eaten all prey
-                    {
-                        lifeStates = LifeStates.Wander; //go to wander state
-                    }
-                    //yield return null;
+                    
                 }
                 break;
             case LifeStates.Attack:
-                foreach (FlockAgent agent in flock.agents) //loop through list of prey
+                foreach (FlockAgent preyAgent in prey.GetFlock().agents) //loop through list of prey
                 {
-                    //otherFlock = prey;
-                    AttackState();
-                    List<Transform> filteredContext = (otherFlock != null) ? flock.context : otherFlock.Filter(agent, flock.context); //Filter through other flock (prey)
-
-                    if (filteredContext.Count > minDistance) //if count of filtered flock (prey) is in range, then pursue 
-                    {
-                        lifeStates = LifeStates.Attack;
-                    }
-                    else //if prey not in range, predator wander
-                    {
-                        lifeStates = LifeStates.Wander;
-                    }
-                    //yield return null;
+                    
                 }
                 break;
             case LifeStates.CollisionAvoidance:
@@ -71,85 +53,78 @@ public class Predator : Life
                     print(stateText + LifeStates.CollisionAvoidance.ToString());
                     Vector2 velocity = obstacleAvoid.CalculateMove(agent, GetNearbyObjects(agent), flock);
                     agent.Move(velocity);
-                    //yield return null;
                 }
                 break;
-
-            case LifeStates.Wander:
-                foreach (FlockAgent agent in flock.agents)
-                {
-                    Vector2 velocity = wanderBehavior.CalculateMove(agent, GetNearbyObjects(agent), flock);
-                    agent.Move(velocity);
-                    //yield return null;
-                }
-                break;
-        }
+        }*/
+        #endregion
     }
-
 
     #region Attack
     private IEnumerator AttackState()
     {
         while (lifeStates == LifeStates.Attack)
         {
-            print("Predator are eating prey");
             stateText.text = "Predator State: " + LifeStates.Attack.ToString();
-            if (prey.tag == "Prey" && gameObject.CompareTag("Predator"))
+            
+            foreach (FlockAgent predatorAgent in flock.agents)
             {
-                Vector2 velocity = attackBehavior.CalculateMove(agent, GetNearbyObjects(agent), flock);
-                agent.Move(velocity);
-                Destroy(prey.gameObject);
-                yield return null;
-                if (prey == null)
+                Vector2 velocity = attackBehavior.CalculateMove(predatorAgent, GetNearbyObjects(predatorAgent), flock);
+                predatorAgent.Move(velocity);
+
+                foreach (FlockAgent preyAgent in prey.GetFlock().agents) //go through list of agents in prey
                 {
-                    Debug.Log("Prey have all been eaten");
-                    lifeStates = LifeStates.Wander; //go to wander state
-                }
-                else
-                {
-                    DontDestroyOnLoad(prey);
+                    // check if prey is in range of attack range (1f)
+                    if (Vector3.Distance(preyAgent.transform.position, predatorAgent.transform.position) < attackRadius)
+                    {
+                        Destroy(prey.gameObject);
+                  
+                        if (prey.GetFlock().agents.Count <= 0) //if predators have eaten all prey
+                        {
+                            lifeStates = LifeStates.Wander; //go back to wander state
+                            continue;
+                        }
+                    }
                 }
             }
-            yield return null;
+            print("Predator are eating prey");
         }
         yield return null;
+        NextState();
     }
     #endregion
 
     #region Wander
     private IEnumerator WanderState() //make predator travel path
     {
-
         while (lifeStates == LifeStates.Wander) //while in wander state
         {
             print("Predators are wandering");
             stateText.text = "Predator State: " + LifeStates.Wander.ToString();
-            foreach (FlockAgent agent in flock.agents) //go through list of agents in FlockAgent
+
+            foreach (FlockAgent predatorAgent in flock.agents)
             {
-                //Filter through the list of agents and find prey (other flock)
-                List<Transform> filteredContext = (otherFlock == null) ? flock.context : otherFlock.Filter(agent, flock.context);
-                flock.agentPrefab.Move(wanderPoints[index].position); //move on waypoints
-                yield return null;
-                //If the distance between the prey and predator is greater than 5(chase prey range) then AI patrols
-                if (Vector2.Distance(prey.transform.position, transform.position) > chaseRadius)
+                Vector2 velocity = wanderBehavior.CalculateMove(predatorAgent, GetNearbyObjects(predatorAgent), flock);
+                predatorAgent.Move(velocity);
+
+                foreach (FlockAgent preyAgent in prey.GetFlock().agents) //go through list of agents in FlockAgent
                 {
-                    //Change state to wander state
-                    lifeStates = LifeStates.Wander;
+                    if (Vector2.Distance(preyAgent.transform.position, predatorAgent.transform.position) < chaseRadius)
+                    {
+                        //Change state to attack state and eat prey
+                        lifeStates = LifeStates.Pursuit;
+                        break;
+                    }
                 }
-                //If the distance between the prey and predator is less than 5(attack prey range)  
-                else if (Vector2.Distance(prey.transform.position, transform.position) < chaseRadius)
-                {
-                    //Change state to attack state and eat prey
-                    lifeStates = LifeStates.Attack;
-                }
+
+                if (lifeStates != LifeStates.Wander)
+                    break;
             }
             yield return null;
         }
         NextState();
         yield return null;
     }
-    public float minDistance = 0.5f;
-    private void Wander() 
+    /*private void Wander() 
     {
         foreach (FlockAgent agent in flock.agents)
         {
@@ -170,25 +145,39 @@ public class Predator : Life
             index = 0;
         }
         //flock.agentPrefab.Move(wanderPoints[index].position);
-    }
+    }*/
     #endregion
 
-    #region Pursuit Offset
+    #region Pursuit 
     private IEnumerator PursuitState()
     {
         while (lifeStates == LifeStates.Pursuit)
         {
             stateText.text = "Predator State: " + LifeStates.Pursuit.ToString();
-            foreach (FlockAgent agent in flock.agents)
+            foreach (FlockAgent predatorAgent in flock.agents)
             {
-                Vector2 velocity = pursuitBehavior.CalculateMove(agent, GetNearbyObjects(agent), flock);
-                agent.Move(velocity);
-                yield return null;
+                Vector2 velocity = pursuitBehavior.CalculateMove(predatorAgent, GetNearbyObjects(predatorAgent), flock);
+                predatorAgent.Move(velocity);
+
+                foreach (FlockAgent preyAgent in prey.GetFlock().agents) //go through list of agents in FlockAgent
+                {
+                    // check if prey is too far away
+                    if (Vector3.Distance(preyAgent.transform.position, predatorAgent.transform.position) > chaseRadius)
+                    {
+                        lifeStates = LifeStates.Wander;
+                        continue;
+                    }
+                    else
+                    {
+                        lifeStates = LifeStates.Attack;
+                    }
+                }
             }
             print("Predator are pursuing prey");
             yield return null;
         }
         yield return null;
+        NextState();
     }
     #endregion
 
@@ -204,7 +193,7 @@ public class Predator : Life
                 yield return null;
             }
             print("Predator are avoiding obstacles");
-            
+
         }
         yield return null;
     }

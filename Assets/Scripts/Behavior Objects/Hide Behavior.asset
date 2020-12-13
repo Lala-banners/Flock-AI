@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   filter: {fileID: 11400000, guid: 26ee34276c4bded4fbd5bd2bfce7ebe8, type: 2}
   obstacleFilter: {fileID: 11400000, guid: 644e9f27383085f40b8fc37a46219edf, type: 2}
-  hideBehindObstacleDist: 2
+  hideBehindObstacleDist: 5
