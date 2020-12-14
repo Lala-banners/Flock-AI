@@ -66,7 +66,18 @@ public class Predator : Life
         {
             stateText.text = "Predator State: " + LifeStates.Attack.ToString();
             
-            foreach (FlockAgent predatorAgent in flock.agents)
+            if(prey.gameObject.tag == "Prey" && this.gameObject.tag == "Predator")
+            {
+                Vector2 velocity = attackBehavior.CalculateMove(agent, GetNearbyObjects(agent), flock);
+                agent.Move(velocity);
+                Destroy(prey.gameObject);
+            }
+            if (prey == null)
+            {
+                Debug.Log("Prey have all been eaten");
+                lifeStates = LifeStates.Wander; //go to wander state
+            }
+            /*foreach (FlockAgent predatorAgent in flock.agents)
             {
                 Vector2 velocity = attackBehavior.CalculateMove(predatorAgent, GetNearbyObjects(predatorAgent), flock);
                 predatorAgent.Move(velocity);
@@ -85,7 +96,7 @@ public class Predator : Life
                         }
                     }
                 }
-            }
+            }*/
             print("Predator are eating prey");
         }
         yield return null;
@@ -198,7 +209,19 @@ public class Predator : Life
         }
         yield return null;
     }
+
+   /* // OnCollisionStay2D is called once per frame for every collider2D/rigidbody2D that is touching rigidbody2D/collider2D (2D physics only)
+    private void OnCollisionStay2D(Collision2D collision) //if collider is prey then switch to attack state
+    {
+        if(collision.collider == prey)
+        {
+            Destroy(prey);
+            lifeStates = LifeStates.Attack;
+        }
+    }*/
     #endregion
+
+
 
 
 
