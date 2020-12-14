@@ -81,7 +81,7 @@ public class Predator : Life
                         if (prey.GetFlock().agents.Count <= 0) //if predators have eaten all prey
                         {
                             lifeStates = LifeStates.Wander; //go back to wander state
-                            continue;
+                            
                         }
                     }
                 }
@@ -170,7 +170,7 @@ public class Predator : Life
                     else
                     {
                         lifeStates = LifeStates.Attack;
-                        continue;
+                        
                     }
                 }
             }
