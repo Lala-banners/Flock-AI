@@ -97,8 +97,9 @@ public class Prey : Life
             }
             yield return null;
         }
-        yield return null;
         NextState();
+        yield return null;
+        
     }
     #endregion
 
@@ -116,9 +117,9 @@ public class Prey : Life
             }
             yield return null;
         }
-
-        yield return null;
         NextState();
+        yield return null;
+        
     }
     #endregion
 
@@ -137,8 +138,9 @@ public class Prey : Life
 
             yield return null;
         }
-        yield return null;
         NextState();
+        yield return null;
+        
     }
     #endregion
 

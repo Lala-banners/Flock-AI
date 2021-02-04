@@ -60,7 +60,7 @@ public class Predator : Life
     }
 
     #region Attack
-    private IEnumerator AttackState()
+    private IEnumerator AttackState() //Doesnt work 
     {
         while (lifeStates == LifeStates.Attack)
         {
@@ -77,9 +77,11 @@ public class Predator : Life
                     if (Vector3.Distance(preyAgent.transform.position, predatorAgent.transform.position) < attackRadius)
                     {
                         Destroy(prey.gameObject);
+                        print("Prey are being eaten");
                   
                         if (prey.GetFlock().agents.Count <= 0) //if predators have eaten all prey
                         {
+                            print("Prey are gone");
                             lifeStates = LifeStates.Wander; //go back to wander state
                             
                         }
@@ -88,13 +90,14 @@ public class Predator : Life
             }
             print("Predator are eating prey");
         }
-        yield return null;
         NextState();
+        yield return null;
+       
     }
     #endregion
 
     #region Wander
-    private IEnumerator WanderState() //make predator travel path
+    private IEnumerator WanderState() //does work 
     {
         while (lifeStates == LifeStates.Wander) //while in wander state
         {
@@ -149,7 +152,7 @@ public class Predator : Life
     #endregion
 
     #region Pursuit 
-    private IEnumerator PursuitState()
+    private IEnumerator PursuitState() //doesnt work
     {
         while (lifeStates == LifeStates.Pursuit)
         {
@@ -177,13 +180,14 @@ public class Predator : Life
             print("Predator are pursuing prey");
             yield return null;
         }
-        yield return null;
         NextState();
+        yield return null;
+        
     }
     #endregion
 
-    #region Collision Avoidance
-    private IEnumerator CollisionAvoidState()
+    #region Collision Avoidance 
+    private IEnumerator CollisionAvoidState() //does work 
     {
         while (lifeStates == LifeStates.CollisionAvoidance)
         {
